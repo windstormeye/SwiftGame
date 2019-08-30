@@ -10,5 +10,5 @@ import Foundation
 
 struct Light {
     /// 开关状态
-    var status = Bool.random()
+    var status = false
 }

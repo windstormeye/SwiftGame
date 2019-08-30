@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A601DB2B2317775100327867 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = A601DB2A2317775100327867 /* Light.swift */; };
+		A62D002F231904F80062A70E /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62D002E231904F80062A70E /* GameManager.swift */; };
 		A676EA93231771D3002074BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A676EA92231771D3002074BF /* AppDelegate.swift */; };
 		A676EA95231771D3002074BF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A676EA94231771D3002074BF /* SceneDelegate.swift */; };
 		A676EA97231771D3002074BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A676EA96231771D3002074BF /* ContentView.swift */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		A601DB2A2317775100327867 /* Light.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
+		A62D002E231904F80062A70E /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		A676EA8F231771D3002074BF /* light-game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "light-game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A676EA92231771D3002074BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A676EA94231771D3002074BF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +45,7 @@
 			isa = PBXGroup;
 			children = (
 				A601DB2A2317775100327867 /* Light.swift */,
+				A62D002E231904F80062A70E /* GameManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 				A676EA95231771D3002074BF /* SceneDelegate.swift in Sources */,
 				A601DB2B2317775100327867 /* Light.swift in Sources */,
 				A676EA97231771D3002074BF /* ContentView.swift in Sources */,
+				A62D002F231904F80062A70E /* GameManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

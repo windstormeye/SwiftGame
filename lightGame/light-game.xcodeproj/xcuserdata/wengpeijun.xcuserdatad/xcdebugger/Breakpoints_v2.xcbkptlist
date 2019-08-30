@@ -7,17 +7,190 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F99E3F41-26E4-48DD-8633-A1C5F09BE899"
+            uuid = "EE1B491C-580A-4CC8-BB14-D1749FB0BC8D"
             shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "light-game/Model/GameManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "GameManager"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "17E9A87A-BFC8-4630-B22E-FD03AD07CDDB"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "light-game/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "init()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "719298ED-9B7C-4EA9-8A02-EB91F2D9BB00"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "light-game/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "719298ED-9B7C-4EA9-8A02-EB91F2D9BB00 - 7f30859807aa2fd5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "light_game.ContentView.body.getter : some"
+                  moduleName = "light-game"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wengpeijun/Documents/SwiftGame/lightGame/light-game/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "62">
+               </Location>
+               <Location
+                  uuid = "719298ED-9B7C-4EA9-8A02-EB91F2D9BB00 - 959c2e6603cd44ab"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Int) -&gt; &lt;&lt;opaque return type of (extension in SwiftUI):SwiftUI.View.padding(SwiftUI.EdgeInsets) -&gt; some&gt;&gt;.0 in light_game.ContentView.body.getter : some"
+                  moduleName = "light-game"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wengpeijun/Documents/SwiftGame/lightGame/light-game/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "120">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3A1888DC-C1CC-43FF-9BFC-04F138C9B987"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "light-game/Model/GameManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "updateLightStatus(column:row:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A63B6669-35CD-4AEE-A3DB-16D05AC87544"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "light-game/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "ContentView"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "A63B6669-35CD-4AEE-A3DB-16D05AC87544 - dc7ada4f5cc530d1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "light_game.ContentView.gameManager.getter : light_game.GameManager"
+                  moduleName = "light-game"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wengpeijun/Documents/SwiftGame/lightGame/light-game/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "43">
+               </Location>
+               <Location
+                  uuid = "A63B6669-35CD-4AEE-A3DB-16D05AC87544 - e94d216f52c03895"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "light_game.ContentView.gameManager.setter : light_game.GameManager"
+                  moduleName = "light-game"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wengpeijun/Documents/SwiftGame/lightGame/light-game/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "80">
+               </Location>
+               <Location
+                  uuid = "A63B6669-35CD-4AEE-A3DB-16D05AC87544 - 1f5cde58d3e2bee2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "light_game.ContentView.gameManager.modify : light_game.GameManager"
+                  moduleName = "light-game"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wengpeijun/Documents/SwiftGame/lightGame/light-game/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  uuid = "A63B6669-35CD-4AEE-A3DB-16D05AC87544 - f86a9276d08465db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "light_game.ContentView.gameManager.modify : light_game.GameManager with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "light-game"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wengpeijun/Documents/SwiftGame/lightGame/light-game/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "27">
+               </Location>
+               <Location
+                  uuid = "A63B6669-35CD-4AEE-A3DB-16D05AC87544 - d0f1142d9b9f6287"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "light_game.ContentView.$gameManager.getter : SwiftUI.ObservedObject&lt;light_game.GameManager&gt;.Wrapper"
+                  moduleName = "light-game"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wengpeijun/Documents/SwiftGame/lightGame/light-game/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "93">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
