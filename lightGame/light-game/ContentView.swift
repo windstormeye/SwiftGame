@@ -9,11 +9,7 @@
 import SwiftUI
 
 struct ContentView: View {    
-    @ObservedObject var gameManager = GameManager()
-    
-    init() {
-        gameManager = GameManager(size: 5, lightSequence: [1, 2, 3])
-    }
+    @ObservedObject var gameManager = GameManager(size: 5, lightSequence: [1, 2, 3])
     
     var body: some View {
         ForEach(0..<gameManager.lights.count) { row in
@@ -32,5 +28,14 @@ struct ContentView: View {
             }
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
         }
+            .alert(isPresented: $gameManager.isWin) {
+                Alert(title: Text("黑灯瞎火，摸鱼成功！"),
+                      dismissButton: .default(Text("继续摸鱼"),
+                                              action: {
+                                                self.gameManager.start([3, 2, 1])
+                      }
+                    )
+                )
+            }
     }
 }

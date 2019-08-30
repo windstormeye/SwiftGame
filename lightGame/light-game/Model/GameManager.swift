@@ -10,13 +10,24 @@ import SwiftUI
 import Combine
 
 class GameManager: ObservableObject {
+    /// 灯状态
     @Published var lights = [[Light]]()
+    @Published var isWin = false
+    /// 当前游戏状态
+    private var currentStatus: GameStatus = .during {
+        didSet {
+            switch currentStatus {
+            case .win: isWin = true
+            case .lose: isWin = false
+            case .during: break
+            }
+        }
+    }
+    
     /// 游戏尺寸大小
     private(set) var size: Int?
     
     // MARK: - Init
-    
-    init() {}
     
     /// 便捷构造方法
     /// - Parameters:
@@ -24,6 +35,7 @@ class GameManager: ObservableObject {
     ///   - lightSequence: 亮灯序列，默认全灭
     convenience init(size: Int = 5,
                      lightSequence: [Int] = [Int]()) {
+        
         self.init()
         
         var size = size
@@ -38,10 +50,17 @@ class GameManager: ObservableObject {
         self.size = size
         lights = Array(repeating: Array(repeating: Light(), count: size), count: size)
         
-        updateLightStatus(lightSequence)
+        start(lightSequence)
     }
     
     // MARK: Public
+    
+    /// 游戏配置
+    /// - Parameter lightSequence： 亮灯序列
+    func start(_ lightSequence: [Int]) {
+        currentStatus = .during
+        updateLightStatus(lightSequence)
+    }
     
     /// 获取灯的尺寸
     func circleWidth() -> CGFloat {
@@ -89,6 +108,8 @@ class GameManager: ObservableObject {
         if !(right > lights.count - 1) {
             lights[row][right].status.toggle()
         }
+        
+        updateGameStatus()
     }
     
     // MARK: Private
@@ -109,5 +130,40 @@ class GameManager: ObservableObject {
             }
             updateLightStatus(column: column - 1, row: row - 1)
         }
+    }
+    
+    /// 判赢
+    private func updateGameStatus() {
+        guard let size = size else { return }
+        
+        var lightingCount = 0
+        
+        
+        for lightArr in lights {
+            for light in lightArr {
+                if light.status { lightingCount += 1 }
+            }
+        }
+        
+        if lightingCount == size * size {
+            currentStatus = .lose
+            return
+        }
+        
+        if lightingCount == 0 {
+            currentStatus = .win
+            return
+        }
+    }
+}
+
+extension GameManager {
+    enum GameStatus {
+        /// 赢
+        case win
+        /// 输
+        case lose
+        /// 进行中
+        case during
     }
 }
