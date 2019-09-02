@@ -10,6 +10,10 @@ import SwiftUI
 import Combine
 
 class GameManager: ObservableObject {
+    /// 对外发布的格式化计时器字符串
+    @Published var timeString = "00:00"
+    /// 点击次数
+    @Published var clickTimes = 0
     /// 灯状态
     @Published var lights = [[Light]]()
     @Published var isWin = false
@@ -26,6 +30,10 @@ class GameManager: ObservableObject {
     
     /// 游戏尺寸大小
     private(set) var size: Int?
+    /// 游戏计时器
+    private var timer: Timer?
+    /// 游戏持续时间
+    private var durations = 0
     
     // MARK: - Init
     
@@ -59,7 +67,33 @@ class GameManager: ObservableObject {
     /// - Parameter lightSequence： 亮灯序列
     func start(_ lightSequence: [Int]) {
         currentStatus = .during
+        clickTimes = 0
         updateLightStatus(lightSequence)
+        timerRestart()
+    }
+    
+    /// 停止
+    func timerStop() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    /// 重新创建
+    func timerRestart() {
+        self.durations = 0
+        self.timeString = "00:00"
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
+            self.durations += 1
+            
+            let min = self.durations >= 60 ? self.durations / 60 : 0
+            let seconds = self.durations - min * 60
+            
+            
+            let minString = min >= 10 ? "\(min)" : "0\(min)"
+            let secondString = self.durations - min * 60 >= 10 ? "\(seconds)" : "0\(seconds)"
+            self.timeString = minString + ":" + secondString
+        })
     }
     
     /// 获取灯的尺寸
@@ -146,11 +180,13 @@ class GameManager: ObservableObject {
         }
         
         if lightingCount == size * size {
+            timerStop()
             currentStatus = .lose
             return
         }
         
         if lightingCount == 0 {
+            timerStop()
             currentStatus = .win
             return
         }
