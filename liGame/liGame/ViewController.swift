@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     private var lineImageView = UIImageView()
+    private var puzzles = [Puzzle]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +35,32 @@ class ViewController: UIViewController {
         imgView.image = UIGraphicsGetImageFromCurrentImageContext()
         
         
-        let puzzle = Puzzle(frame: CGRect(x: 100, y: 100, width: 50, height: 50), isCopy: false)
-        view.addSubview(puzzle)
+        // 底图适配
+        let contentImage = UIImage(named: "01")!
+        let contentImageScale = view.width / contentImage.size.width
+        let contentImageViewHeight = contentImage.size.height * contentImageScale
+        
+        let contentImageView = UIImageView(frame: CGRect(x: 0, y: topSafeAreaHeight, width: view.width, height: contentImageViewHeight))
+        contentImageView.image = contentImage
+        
+        // 一行六个
+        let itemHCount = 6
+        let itemW = Int(view.width / CGFloat(itemHCount))
+        let itemVCount = Int(contentImageView.height / CGFloat(itemW))
+        
+        for itemY in 0..<itemVCount {
+            for itemX in 0..<itemHCount {
+                let x = itemW * itemX
+                let y = itemW * itemY
+                
+                let img = contentImageView.image!.image(with: CGRect(x: x, y: y, width: itemW, height: itemW))
+                let puzzle = Puzzle(size: CGSize(width: itemW, height: itemW), isCopy: false)
+                puzzle.image = img
+                puzzles.append(puzzle)
+                
+                view.addSubview(puzzle)
+            }
+        }
     }
 }
 

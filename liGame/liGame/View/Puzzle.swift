@@ -8,10 +8,11 @@
 
 import UIKit
 
-class Puzzle: UIView {
+class Puzzle: UIImageView {
 
     /// 是否为「拷贝」拼图元素
     private var isCopy = false
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,8 +22,8 @@ class Puzzle: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(frame: CGRect, isCopy: Bool) {
-        self.init(frame: frame)
+    convenience init(size: CGSize, isCopy: Bool) {
+        self.init(frame: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         self.isCopy = isCopy
         
         initView()
@@ -31,8 +32,9 @@ class Puzzle: UIView {
     // MARK: Init
     
     private func initView() {
-        backgroundColor = .red
+//        backgroundColor = .red
         isUserInteractionEnabled = true
+        contentMode = .scaleAspectFit
         
         if !isCopy {
             let panGesture = UIPanGestureRecognizer(target: self, action: .pan)
