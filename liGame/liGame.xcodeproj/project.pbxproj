@@ -15,6 +15,7 @@
 		0C9977832320135200EA0130 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9977822320135200EA0130 /* UIView+Extension.swift */; };
 		0C997785232013C300EA0130 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C997784232013C300EA0130 /* UIColor+Extension.swift */; };
 		0C997788232014A500EA0130 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C997787232014A500EA0130 /* Define.swift */; };
+		0CAE10A62321E76900CFECA5 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAE10A52321E76900CFECA5 /* Puzzle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		0C9977822320135200EA0130 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		0C997784232013C300EA0130 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		0C997787232014A500EA0130 /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
+		0CAE10A52321E76900CFECA5 /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			children = (
 				0C99777023200DE600EA0130 /* AppDelegate.swift */,
 				0C99777223200DE600EA0130 /* ViewController.swift */,
+				0C9977892321E70900EA0130 /* View */,
 				0C9977862320149900EA0130 /* Extension */,
 				0C99777423200DE600EA0130 /* Main.storyboard */,
 				0C99777723200DE700EA0130 /* Assets.xcassets */,
@@ -79,6 +82,14 @@
 				0C997787232014A500EA0130 /* Define.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		0C9977892321E70900EA0130 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0CAE10A52321E76900CFECA5 /* Puzzle.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +166,7 @@
 				0C9977832320135200EA0130 /* UIView+Extension.swift in Sources */,
 				0C99777323200DE600EA0130 /* ViewController.swift in Sources */,
 				0C99777123200DE600EA0130 /* AppDelegate.swift in Sources */,
+				0CAE10A62321E76900CFECA5 /* Puzzle.swift in Sources */,
 				0C997788232014A500EA0130 /* Define.swift in Sources */,
 				0C997785232013C300EA0130 /* UIColor+Extension.swift in Sources */,
 			);

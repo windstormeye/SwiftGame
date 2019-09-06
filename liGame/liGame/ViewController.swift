@@ -32,8 +32,10 @@ class ViewController: UIViewController {
         context.strokePath()
         
         imgView.image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        
+        let puzzle = Puzzle(frame: CGRect(x: 100, y: 100, width: 50, height: 50), isCopy: false)
+        view.addSubview(puzzle)
     }
-
-
 }
 

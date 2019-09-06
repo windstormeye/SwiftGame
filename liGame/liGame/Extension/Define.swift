@@ -8,13 +8,15 @@
 
 import UIKit
 
+/// 屏幕宽
 let screenWidth = UIScreen.main.bounds.size.width
+/// 屏幕高
 let screentHeight = UIScreen.main.bounds.size.height
-// 底部安全距离
+/// 底部安全距离
 let bottomSafeAreaHeight = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0.0
-//顶部的安全距离
+///顶部的安全距离
 let topSafeAreaHeight = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0.0
-//状态栏高度
+/// 状态栏高度
 let statusBarHeight = UIApplication.shared.statusBarFrame.height;
-//导航栏高度
+/// 导航栏高度
 let navigationBarHeight = CGFloat(44 + topSafeAreaHeight)
