@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     private var lineImageView = UIImageView()
     private var puzzles = [Puzzle]()
+    private var bottomView = LiBottomView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,10 +57,65 @@ class ViewController: UIViewController {
                 let img = contentImageView.image!.image(with: CGRect(x: x, y: y, width: itemW, height: itemW))
                 let puzzle = Puzzle(size: CGSize(width: itemW, height: itemW), isCopy: false)
                 puzzle.image = img
-                puzzles.append(puzzle)
+                puzzle.tag = (itemY * itemHCount) + itemX
+                print(puzzle.tag)
                 
+                puzzles.append(puzzle)
                 view.addSubview(puzzle)
             }
+        }
+        
+        
+        
+        let bottomView = LiBottomView(height: 64, longPressView: view)
+        view.addSubview(bottomView)
+        self.bottomView = bottomView
+        bottomView.isHidden = true
+        bottomView.layer.opacity = 0
+        
+        UIView.animate(withDuration: 2) {
+            bottomView.isHidden = false
+            bottomView.layer.opacity = 1
+        }
+        
+        bottomView.collectionView?.viewModelIndexs = imgIndexs
+        bottomView.viewModel = puzzles
+        bottomView.moveCell = { cellIndex, centerPoint in
+            guard let tempItem = contentView.tempItem else { return }
+            tempItem.center = CGPoint(x: centerPoint.x,
+                                      y: centerPoint.y + bottomView.top)
+        }
+        bottomView.moveBegin = { cellIndex in
+            guard contentView.itemXCount != nil else { return }
+            
+            let itemW = contentView.itemW
+            // 刚开始的初始化先让其消失
+            let moveItem = PJShowItem(frame: CGRect(x: -1000, y: -1000,
+                                                    width: itemW!, height: itemW!))
+            moveItem.gameType = self.gameType
+            moveItem.endTop = contentView.endTop
+            moveItem.endBottom = contentView.endBottom
+            if self.gameType == .guide {
+                moveItem.endBottom = screenHeight - 40
+            }
+            moveItem.endLeft = contentView.endLeft
+            moveItem.endRight = contentView.endRight
+            moveItem.bgImage = bottomView.viewModel![cellIndex]
+            moveItem.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+            moveItem.tag = bottomView.collectionView!.viewModelIndexs![cellIndex] + 1
+            
+            
+            if [28, 29, 30].contains(moveItem.tag) {
+                moveItem.isBottomItem = true
+            }
+            
+            contentView.addSubview(moveItem)
+            contentView.tempItem = moveItem
+        }
+        
+        bottomView.moveEnd = {
+            guard let tempItem = contentView.tempItem else { return }
+            tempItem.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
     }
 }

@@ -130,3 +130,14 @@ extension UIView {
     }
     
 }
+
+extension UIView {
+    func insertRoundingCorners() {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: 8.0, height: 8.0))
+        let pathMaskLayer = CAShapeLayer()
+        pathMaskLayer.frame = bounds
+        pathMaskLayer.path = path.cgPath
+        layer.mask = pathMaskLayer
+    }
+
+}

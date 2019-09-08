@@ -47,25 +47,23 @@ extension Puzzle {
     @objc
     fileprivate func pan(_ panGesture: UIPanGestureRecognizer) {
         let translation = panGesture.translation(in: superview)
-        var centerX = center.x + translation.x
-        var centerY = center.y + translation.y
+        let newRightPoint = centerX + width / 2
         
         switch panGesture.state {
         case .began:
             layer.borderColor = UIColor.white.cgColor
             layer.borderWidth = 1
         case .changed:
-            if right > superview!.width / 2 {
+            if newRightPoint > superview!.width / 2 {
                 right = superview!.width / 2
             }
         case .ended:
             layer.borderWidth = 0
         default: break
         }
-        center = CGPoint(x: centerX, y: centerY)
+        
+        center = CGPoint(x: center.x + translation.x, y: center.y + translation.y)
         panGesture.setTranslation(.zero, in: superview)
-        
-        
     }
 }
 
