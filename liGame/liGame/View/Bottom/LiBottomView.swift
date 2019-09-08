@@ -10,7 +10,7 @@ import UIKit
 
 class LiBottomView: UIView {
     var viewModel: [Puzzle]? {
-        didSet { collectionView?.viewModels = viewModel }
+        didSet { collectionView?.viewModels = viewModel! }
     }
     var moveCell: ((Int, CGPoint) -> Void)?
     var moveBegin: ((Int) -> Void)?
@@ -22,9 +22,8 @@ class LiBottomView: UIView {
         super.init(frame: frame)
     }
     
-    convenience init(height: CGFloat, longPressView: UIView?) {
-        self.init(frame: CGRect(x: 0, y: screenHeight - height,
-                                width: screenWidth, height: height))
+    convenience init(frame: CGRect, longPressView: UIView?) {
+        self.init(frame: frame)
         self.longPressView = self
         initView()
     }
@@ -50,37 +49,34 @@ class LiBottomView: UIView {
         collectionViewLayout.minimumLineSpacing = innerW
         collectionViewLayout.minimumInteritemSpacing = 10
         collectionViewLayout.scrollDirection = .horizontal
-        collectionViewLayout.sectionInset = UIEdgeInsets.init(top: 0, left: innerW / 2,
-                                                              bottom: 0, right: innerW / 2)
+        collectionViewLayout.sectionInset = UIEdgeInsets.init(top: 0, left: innerW / 2, bottom: 0, right: innerW / 2)
         
-        collectionView = LiBottomCollectionView(frame: CGRect(x: 0, y: 0, width: width,
-                                                            height: height),
-                                              collectionViewLayout: collectionViewLayout,
-                                              longPressView: longPressView)
-        collectionView!.viewDelegate = self
+        
+        collectionView = LiBottomCollectionView(frame: CGRect(x: 0, y: 0, width: width, height: height), collectionViewLayout: collectionViewLayout)
+//        collectionView!.viewDelegate = self
         addSubview(collectionView!)
         
-        collectionView!.moveCell = { [weak self] cellIndex, centerPoint in
-            guard let self = `self` else { return }
-            self.moveCell?(cellIndex, centerPoint)
-        }
-        
-        collectionView?.moveBegin = { [weak self] cellIndex in
-            guard let self = `self` else { return }
-            self.moveBegin?(cellIndex)
-        }
-        
-        collectionView?.moveEnd = { [weak self] in
-            guard let self = `self` else { return }
-            self.moveEnd?()
-            self.viewModel = self.collectionView?.viewModels
-        }
+//        collectionView!.moveCell = { [weak self] cellIndex, centerPoint in
+//            guard let self = `self` else { return }
+//            self.moveCell?(cellIndex, centerPoint)
+//        }
+//
+//        collectionView?.moveBegin = { [weak self] cellIndex in
+//            guard let self = `self` else { return }
+//            self.moveBegin?(cellIndex)
+//        }
+//
+//        collectionView?.moveEnd = { [weak self] in
+//            guard let self = `self` else { return }
+//            self.moveEnd?()
+//            self.viewModel = self.collectionView?.viewModels
+//        }
     }
 }
 
 
-extension LiBottomView: LiBottomCollectionViewDelegate {
-    func collectionViewCellLongPress(_ cellIndex: Int) {
-        
-    }
-}
+//extension LiBottomView: LiBottomCollectionViewDelegate {
+//    func collectionViewCellLongPress(_ cellIndex: Int) {
+//
+//    }
+//}

@@ -18,7 +18,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .bgColor
         
-        let imgView = UIImageView(frame: CGRect(x: view.width / 2, y: topSafeAreaHeight, width: 5, height: view.height - topSafeAreaHeight - bottomSafeAreaHeight))
+        
+        // 底图适配
+        let contentImage = UIImage(named: "01")!
+        let contentImageScale = view.width / contentImage.size.width
+        let contentImageViewHeight = contentImage.size.height * contentImageScale
+        
+        let contentImageView = UIImageView(frame: CGRect(x: 0, y: topSafeAreaHeight, width: view.width, height: contentImageViewHeight))
+        contentImageView.image = contentImage
+        
+        let imgView = UIImageView(frame: CGRect(x: view.width / 2, y: topSafeAreaHeight, width: 5, height: view.height - bottomSafeAreaHeight))
         view.addSubview(imgView)
         UIGraphicsBeginImageContext(imgView.frame.size) // 位图上下文绘制区域
         imgView.image?.draw(in: imgView.bounds)
@@ -35,15 +44,6 @@ class ViewController: UIViewController {
         
         imgView.image = UIGraphicsGetImageFromCurrentImageContext()
         
-        
-        // 底图适配
-        let contentImage = UIImage(named: "01")!
-        let contentImageScale = view.width / contentImage.size.width
-        let contentImageViewHeight = contentImage.size.height * contentImageScale
-        
-        let contentImageView = UIImageView(frame: CGRect(x: 0, y: topSafeAreaHeight, width: view.width, height: contentImageViewHeight))
-        contentImageView.image = contentImage
-        
         // 一行六个
         let itemHCount = 6
         let itemW = Int(view.width / CGFloat(itemHCount))
@@ -58,65 +58,21 @@ class ViewController: UIViewController {
                 let puzzle = Puzzle(size: CGSize(width: itemW, height: itemW), isCopy: false)
                 puzzle.image = img
                 puzzle.tag = (itemY * itemHCount) + itemX
-                print(puzzle.tag)
-                
                 puzzles.append(puzzle)
-                view.addSubview(puzzle)
             }
         }
         
         
-        
-        let bottomView = LiBottomView(height: 64, longPressView: view)
+        let bottomView = LiBottomView(frame: CGRect(x: 0, y: view.height, width: view.width, height: 64 + bottomSafeAreaHeight), longPressView: view)
         view.addSubview(bottomView)
-        self.bottomView = bottomView
-        bottomView.isHidden = true
-        bottomView.layer.opacity = 0
-        
-        UIView.animate(withDuration: 2) {
-            bottomView.isHidden = false
-            bottomView.layer.opacity = 1
-        }
-        
-        bottomView.collectionView?.viewModelIndexs = imgIndexs
         bottomView.viewModel = puzzles
-        bottomView.moveCell = { cellIndex, centerPoint in
-            guard let tempItem = contentView.tempItem else { return }
-            tempItem.center = CGPoint(x: centerPoint.x,
-                                      y: centerPoint.y + bottomView.top)
-        }
-        bottomView.moveBegin = { cellIndex in
-            guard contentView.itemXCount != nil else { return }
-            
-            let itemW = contentView.itemW
-            // 刚开始的初始化先让其消失
-            let moveItem = PJShowItem(frame: CGRect(x: -1000, y: -1000,
-                                                    width: itemW!, height: itemW!))
-            moveItem.gameType = self.gameType
-            moveItem.endTop = contentView.endTop
-            moveItem.endBottom = contentView.endBottom
-            if self.gameType == .guide {
-                moveItem.endBottom = screenHeight - 40
-            }
-            moveItem.endLeft = contentView.endLeft
-            moveItem.endRight = contentView.endRight
-            moveItem.bgImage = bottomView.viewModel![cellIndex]
-            moveItem.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-            moveItem.tag = bottomView.collectionView!.viewModelIndexs![cellIndex] + 1
-            
-            
-            if [28, 29, 30].contains(moveItem.tag) {
-                moveItem.isBottomItem = true
-            }
-            
-            contentView.addSubview(moveItem)
-            contentView.tempItem = moveItem
-        }
+        self.bottomView = bottomView
         
-        bottomView.moveEnd = {
-            guard let tempItem = contentView.tempItem else { return }
-            tempItem.transform = CGAffineTransform(scaleX: 1, y: 1)
-        }
+        
+        UIView.animate(withDuration: 0.25, delay: 0.5, options: .curveEaseIn, animations: {
+            bottomView.bottom = self.view.height
+        })
+        
     }
 }
 
