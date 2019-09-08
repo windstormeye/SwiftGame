@@ -13,7 +13,6 @@ class Puzzle: UIImageView {
     /// 是否为「拷贝」拼图元素
     private var isCopy = false
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -32,7 +31,6 @@ class Puzzle: UIImageView {
     // MARK: Init
     
     private func initView() {
-//        backgroundColor = .red
         isUserInteractionEnabled = true
         contentMode = .scaleAspectFit
         
@@ -49,8 +47,25 @@ extension Puzzle {
     @objc
     fileprivate func pan(_ panGesture: UIPanGestureRecognizer) {
         let translation = panGesture.translation(in: superview)
-        center = CGPoint(x: center.x + translation.x, y: center.y + translation.y)
+        var centerX = center.x + translation.x
+        var centerY = center.y + translation.y
+        
+        switch panGesture.state {
+        case .began:
+            layer.borderColor = UIColor.white.cgColor
+            layer.borderWidth = 1
+        case .changed:
+            if right > superview!.width / 2 {
+                right = superview!.width / 2
+            }
+        case .ended:
+            layer.borderWidth = 0
+        default: break
+        }
+        center = CGPoint(x: centerX, y: centerY)
         panGesture.setTranslation(.zero, in: superview)
+        
+        
     }
 }
 
