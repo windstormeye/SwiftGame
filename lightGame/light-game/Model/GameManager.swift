@@ -33,7 +33,7 @@ class GameManager: ObservableObject {
     /// 游戏计时器
     private var timer: Timer?
     /// 游戏持续时间
-    private var durations = 0
+    private var durations = 1
     
     // MARK: - Init
     
@@ -69,23 +69,8 @@ class GameManager: ObservableObject {
         currentStatus = .during
         clickTimes = 0
         updateLightStatus(lightSequence)
-        timerRestart()
-    }
-    
-    /// 停止
-    func timerStop() {
-        timer?.invalidate()
-        timer = nil
-    }
-    
-    /// 重新创建
-    func timerRestart() {
-        self.durations = 0
-        self.timeString = "00:00"
         
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
-            self.durations += 1
-            
             let min = self.durations >= 60 ? self.durations / 60 : 0
             let seconds = self.durations - min * 60
             
@@ -93,7 +78,21 @@ class GameManager: ObservableObject {
             let minString = min >= 10 ? "\(min)" : "0\(min)"
             let secondString = self.durations - min * 60 >= 10 ? "\(seconds)" : "0\(seconds)"
             self.timeString = minString + ":" + secondString
+            
+            self.durations += 1
         })
+    }
+    
+    /// 停止
+    func timerStop() {
+        timer?.fireDate = Date.distantFuture
+    }
+    
+    /// 重新创建
+    func timerRestart() {
+        durations = 0
+        timeString = "00:00"
+        timer?.fireDate = Date()
     }
     
     /// 获取灯的尺寸
