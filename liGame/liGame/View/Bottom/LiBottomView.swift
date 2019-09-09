@@ -34,6 +34,7 @@ class LiBottomView: UIView {
     
     private func initView() {
         backgroundColor = .clear
+        isUserInteractionEnabled = true
         
         let effect = UIBlurEffect(style: .extraLight)
         let effectView = UIVisualEffectView(effect: effect)

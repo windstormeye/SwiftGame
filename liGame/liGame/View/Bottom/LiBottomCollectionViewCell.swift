@@ -9,7 +9,10 @@
 import UIKit
 
 class LiBottomCollectionViewCell: UICollectionViewCell {
+    var longTap: ((Int) -> ())?
+    
     var img = UIImageView()
+    var index: Int?
     
     var viewModel: Puzzle? {
         didSet { setViewModel() }
@@ -24,6 +27,11 @@ class LiBottomCollectionViewCell: UICollectionViewCell {
         layer.shadowRadius = 10
         layer.shadowOffset = CGSize.zero
         layer.shadowOpacity = 1
+        
+        isUserInteractionEnabled = true
+        
+        let longTapGesture = UILongPressGestureRecognizer(target: self, action: .longTap)
+        addGestureRecognizer(longTapGesture)
     }
     
     required init?(coder: NSCoder) {
@@ -38,4 +46,17 @@ class LiBottomCollectionViewCell: UICollectionViewCell {
             addSubview(img)
         }
     }
+}
+
+extension LiBottomCollectionViewCell {
+    @objc
+    fileprivate func longTap(_ longTapGesture: UILongPressGestureRecognizer) {
+        guard let index = index else { return }
+        
+        longTap?(index)
+    }
+}
+
+private extension Selector {
+    static let longTap = #selector(LiBottomCollectionViewCell.longTap(_:))
 }
