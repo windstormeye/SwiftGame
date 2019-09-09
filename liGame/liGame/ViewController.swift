@@ -65,7 +65,7 @@ class ViewController: UIViewController {
         
         let bottomView = LiBottomView(frame: CGRect(x: 0, y: view.height, width: view.width, height: 64 + bottomSafeAreaHeight), longPressView: view)
         view.addSubview(bottomView)
-        bottomView.viewModel = puzzles
+        bottomView.viewModels = puzzles
         self.bottomView = bottomView
         
         

@@ -9,12 +9,15 @@
 import UIKit
 
 class LiBottomView: UIView {
-    var viewModel: [Puzzle]? {
-        didSet { collectionView?.viewModels = viewModel! }
+    var viewModels = [Puzzle]() {
+        didSet { collectionView!.viewModels = viewModels }
     }
+    
     var moveCell: ((Int, CGPoint) -> Void)?
     var moveBegin: ((Int) -> Void)?
     var moveEnd: (() -> Void)?
+    
+    var tempPuzzle: Puzzle?
     var collectionView: LiBottomCollectionView?
     var longPressView: UIView?
     
@@ -34,7 +37,6 @@ class LiBottomView: UIView {
     
     private func initView() {
         backgroundColor = .clear
-        isUserInteractionEnabled = true
         
         let effect = UIBlurEffect(style: .extraLight)
         let effectView = UIVisualEffectView(effect: effect)
@@ -54,25 +56,37 @@ class LiBottomView: UIView {
         
         
         collectionView = LiBottomCollectionView(frame: CGRect(x: 0, y: 0, width: width, height: height), collectionViewLayout: collectionViewLayout)
-//        collectionView!.viewDelegate = self
         addSubview(collectionView!)
-        
-//        collectionView!.moveCell = { [weak self] cellIndex, centerPoint in
-//            guard let self = `self` else { return }
-//            self.moveCell?(cellIndex, centerPoint)
-//        }
-//
-//        collectionView?.moveBegin = { [weak self] cellIndex in
-//            guard let self = `self` else { return }
-//            self.moveBegin?(cellIndex)
-//        }
-//
-//        collectionView?.moveEnd = { [weak self] in
-//            guard let self = `self` else { return }
-//            self.moveEnd?()
-//            self.viewModel = self.collectionView?.viewModels
-//        }
+        collectionView!.longTapBegan = {
+            let center = $1
+            let tempPuzzle = Puzzle(size: $0.frame.size, isCopy: false)
+            tempPuzzle.image = $0.image
+            tempPuzzle.center = center
+            tempPuzzle.y += self.top
+            self.tempPuzzle = tempPuzzle
+            
+            self.superview!.addSubview(tempPuzzle)
+        }
+        collectionView!.longTapChange = {
+            guard let tempPuzzle = self.tempPuzzle else { return }
+            
+            tempPuzzle.center = CGPoint(x: $0.x, y: $0.y + self.top)
+        }
     }
+}
+
+extension LiBottomView {
+    @objc
+    fileprivate func pan(_ panGesture: UIPanGestureRecognizer) {
+        let translation = panGesture.translation(in: superview)
+        panGesture.view!.center = CGPoint(x: panGesture.view!.center.x + translation.x,
+                                          y: panGesture.view!.center.y + translation.y)
+        panGesture.setTranslation(.zero, in: superview)
+    }
+}
+
+private extension Selector {
+    static let pan = #selector(LiBottomView.pan(_:))
 }
 
 

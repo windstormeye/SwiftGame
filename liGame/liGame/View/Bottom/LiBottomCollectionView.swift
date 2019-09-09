@@ -10,7 +10,10 @@ import UIKit
 
 class LiBottomCollectionView: UICollectionView {
 
-    var longTap: ((Puzzle) -> ())?
+    var longTapBegan: ((Puzzle, CGPoint) -> ())?
+    var longTapChange: ((CGPoint) -> ())?
+    var longTapEnded: ((Puzzle) -> ())?
+    
 
     let cellIdentifier = "PJLineCollectionViewCell"
     var viewModels = [Puzzle]()
@@ -28,7 +31,7 @@ class LiBottomCollectionView: UICollectionView {
         backgroundColor = .clear
         showsHorizontalScrollIndicator = false
         isPagingEnabled = true
-        isUserInteractionEnabled = true
+//        isUserInteractionEnabled = true
         dataSource = self
         
         register(LiBottomCollectionViewCell.self, forCellWithReuseIdentifier: "LiBottomCollectionViewCell")
@@ -44,13 +47,25 @@ extension LiBottomCollectionView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiBottomCollectionViewCell", for: indexPath) as! LiBottomCollectionViewCell
         cell.viewModel = viewModels[indexPath.row]
         // TODO: 有问题。修改完后会走两次
-        cell.index = indexPath.row
-        cell.longTap = { [weak self] index in
+        cell.index = viewModels[indexPath.row].tag
+        print(cell.index)
+        cell.longTapBegan = { [weak self] index in
             guard let self = self else { return }
-            self.longTap?(self.viewModels[index])
-            self.viewModels.remove(at: index)
+            guard self.viewModels.count != 0 else { return }
+            self.longTapBegan?(self.viewModels[index], cell.center)
+//            self.viewModels.remove(at: index)
+//            print(index)
             self.reloadData()
         }
+        cell.longTapChange = {
+            self.longTapChange?($0)
+        }
+        cell.longTapEnded = {
+            self.longTapEnded?(self.viewModels[$0])
+            self.viewModels.remove(at: $0)
+            self.reloadData()
+        }
+        
         return cell
     }
 }

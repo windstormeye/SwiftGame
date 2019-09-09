@@ -9,7 +9,9 @@
 import UIKit
 
 class LiBottomCollectionViewCell: UICollectionViewCell {
-    var longTap: ((Int) -> ())?
+    var longTapBegan: ((Int) -> ())?
+    var longTapChange: ((CGPoint) -> ())?
+    var longTapEnded: ((Int) -> ())?
     
     var img = UIImageView()
     var index: Int?
@@ -28,7 +30,6 @@ class LiBottomCollectionViewCell: UICollectionViewCell {
         layer.shadowOffset = CGSize.zero
         layer.shadowOpacity = 1
         
-        isUserInteractionEnabled = true
         
         let longTapGesture = UILongPressGestureRecognizer(target: self, action: .longTap)
         addGestureRecognizer(longTapGesture)
@@ -53,7 +54,17 @@ extension LiBottomCollectionViewCell {
     fileprivate func longTap(_ longTapGesture: UILongPressGestureRecognizer) {
         guard let index = index else { return }
         
-        longTap?(index)
+        switch longTapGesture.state {
+        case .began:
+            longTapBegan?(index)
+        case .changed:
+            let translation = longTapGesture.location(in: superview)
+            let point = CGPoint(x: translation.x, y: translation.y)
+            longTapChange?(point)
+        case .ended:
+            longTapEnded?(index)
+        default: break
+        }
     }
 }
 
