@@ -15,11 +15,16 @@ class LiBottomView: UIView {
     
     var moveCell: ((Int, CGPoint) -> Void)?
     var moveBegin: ((Int) -> Void)?
-    var moveEnd: (() -> Void)?
+    var moveEnd: ((Puzzle) -> Void)?
     
     var tempPuzzle: Puzzle?
     var collectionView: LiBottomCollectionView?
     var longPressView: UIView?
+    
+    private var rightPoint: CGFloat = 0
+    private var leftaPoint: CGFloat = 0
+    private var topPoint: CGFloat = 0
+    private var bottomPoint: CGFloat = 0
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,6 +42,11 @@ class LiBottomView: UIView {
     
     private func initView() {
         backgroundColor = .clear
+        
+        topPoint = topSafeAreaHeight
+        bottomPoint = screenHeight - bottomSafeAreaHeight
+        rightPoint = screenWidth / 2
+        leftaPoint = 0
         
         let effect = UIBlurEffect(style: .extraLight)
         let effectView = UIVisualEffectView(effect: effect)
@@ -66,11 +76,27 @@ class LiBottomView: UIView {
             self.tempPuzzle = tempPuzzle
             
             self.superview!.addSubview(tempPuzzle)
+            tempPuzzle.updateEdge()
         }
         collectionView!.longTapChange = {
             guard let tempPuzzle = self.tempPuzzle else { return }
-            
             tempPuzzle.center = CGPoint(x: $0.x, y: $0.y + self.top)
+
+            if tempPuzzle.right > self.rightPoint {
+                tempPuzzle.right = self.rightPoint
+            }
+            if tempPuzzle.left < self.leftaPoint {
+                tempPuzzle.left = self.leftaPoint
+            }
+            if tempPuzzle.top < self.topPoint {
+                tempPuzzle.top = self.topPoint
+            }
+            if tempPuzzle.bottom > self.bottomPoint {
+                tempPuzzle.bottom = self.bottomPoint
+            }
+        }
+        collectionView!.longTapEnded = {
+            self.moveEnd?($0)
         }
     }
 }

@@ -12,6 +12,11 @@ class Puzzle: UIImageView {
 
     /// 是否为「拷贝」拼图元素
     private var isCopy = false
+    private var rightPoint: CGFloat = 0
+    private var leftaPoint: CGFloat = 0
+    private var topPoint: CGFloat = 0
+    private var bottomPoint: CGFloat = 0
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,18 +33,40 @@ class Puzzle: UIImageView {
         initView()
     }
     
+    
     // MARK: Init
     
     private func initView() {
-        isUserInteractionEnabled = true
         contentMode = .scaleAspectFit
         
         if !isCopy {
+            isUserInteractionEnabled = true
+            
             let panGesture = UIPanGestureRecognizer(target: self, action: .pan)
             self.addGestureRecognizer(panGesture)
+        } else {
         }
     }
-
+    
+    
+    func updateEdge() {
+        if superview != nil {
+            if !isCopy {
+                topPoint = topSafeAreaHeight
+                bottomPoint = superview!.bottom - bottomSafeAreaHeight
+                rightPoint = superview!.width / 2
+                leftaPoint = 0
+            }
+        } else {
+            if superview != nil {
+                topPoint = superview!.top
+                bottomPoint = superview!.bottom
+                rightPoint = superview!.width
+                leftaPoint = superview!.width / 2
+            }
+        }
+    }
+    
 }
 
 
@@ -47,16 +74,25 @@ extension Puzzle {
     @objc
     fileprivate func pan(_ panGesture: UIPanGestureRecognizer) {
         let translation = panGesture.translation(in: superview)
-        let newRightPoint = centerX + width / 2
         
         switch panGesture.state {
         case .began:
             layer.borderColor = UIColor.white.cgColor
             layer.borderWidth = 1
         case .changed:
-            if newRightPoint > superview!.width / 2 {
-                right = superview!.width / 2
+            if right > rightPoint {
+                right = rightPoint
             }
+            if left < leftaPoint {
+                left = leftaPoint
+            }
+            if top < topPoint {
+                top = topPoint
+            }
+            if bottom > bottomPoint {
+                bottom = bottomPoint
+            }
+            
         case .ended:
             layer.borderWidth = 0
         default: break

@@ -67,6 +67,9 @@ class ViewController: UIViewController {
         view.addSubview(bottomView)
         bottomView.viewModels = puzzles
         self.bottomView = bottomView
+        bottomView.moveEnd = {
+            let copyPuzzle = Puzzle(size: $0.frame.size, isCopy: true)
+        }
         
         
         UIView.animate(withDuration: 0.25, delay: 0.5, options: .curveEaseIn, animations: {
