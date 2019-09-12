@@ -62,6 +62,13 @@ class ViewController: UIViewController {
             }
         }
         
+        for i in 1..<puzzles.count {
+            let index = Int(arc4random()) % i
+            if index != i {
+                puzzles.swapAt(i, index)
+            }
+        }
+        
         
         let bottomView = LiBottomView(frame: CGRect(x: 0, y: view.height, width: view.width, height: 64 + bottomSafeAreaHeight), longPressView: view)
         view.addSubview(bottomView)
