@@ -13,8 +13,12 @@ class LiBottomCollectionViewCell: UICollectionViewCell {
     var longTapChange: ((CGPoint) -> ())?
     var longTapEnded: ((Int) -> ())?
     
-    var img = UIImageView()
-    var index: Int?
+    var cellIndex: Int?
+    var gameIndex: Int?
+    
+    private var img = UIImageView()
+    private var tipLabel = UILabel()
+    
     
     var viewModel: Puzzle? {
         didSet { setViewModel() }
@@ -30,6 +34,20 @@ class LiBottomCollectionViewCell: UICollectionViewCell {
         layer.shadowOffset = CGSize.zero
         layer.shadowOpacity = 1
         
+        img.contentMode = .scaleAspectFit
+        img.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        addSubview(img)
+
+        
+        tipLabel = UILabel(frame: CGRect(x: width - 10, y: top - 10, width: 17, height: 17))
+        tipLabel.font = UIFont.systemFont(ofSize: 11)
+        tipLabel.backgroundColor = UIColor.rgb(80, 80, 80)
+        tipLabel.textColor = .white
+        tipLabel.textAlignment = .center
+        tipLabel.layer.cornerRadius = tipLabel.width / 2
+        tipLabel.layer.masksToBounds = true
+        addSubview(tipLabel)
+
         
         let longTapGesture = UILongPressGestureRecognizer(target: self, action: .longTap)
         addGestureRecognizer(longTapGesture)
@@ -40,29 +58,31 @@ class LiBottomCollectionViewCell: UICollectionViewCell {
     }
     
     private func setViewModel() {
-        img.contentMode = .scaleAspectFit
         img.image = viewModel?.image
-        img.frame = CGRect(x: 0, y: 0, width: width, height: height)
-        if !subviews.contains(img) {
-            addSubview(img)
-        }
+        tipLabel.text = "\(gameIndex!)"
     }
 }
 
 extension LiBottomCollectionViewCell {
     @objc
     fileprivate func longTap(_ longTapGesture: UILongPressGestureRecognizer) {
-        guard let index = index else { return }
+        guard let cellIndex = cellIndex else { return }
         
         switch longTapGesture.state {
         case .began:
-            longTapBegan?(index)
+            longTapBegan?(cellIndex)
         case .changed:
-            let translation = longTapGesture.location(in: superview)
+            var translation = longTapGesture.location(in: superview)
+            
+            let itemCount = 5
+            if cellIndex > itemCount {
+                translation.x = translation.x - CGFloat(cellIndex / itemCount * Int(screenWidth))
+            }
+            
             let point = CGPoint(x: translation.x, y: translation.y)
             longTapChange?(point)
         case .ended:
-            longTapEnded?(index)
+            longTapEnded?(cellIndex)
         default: break
         }
     }
