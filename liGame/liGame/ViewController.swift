@@ -11,8 +11,13 @@ import UIKit
 class ViewController: UIViewController {
 
     private var lineImageView = UIImageView()
-    private var puzzles = [Puzzle]()
     private var bottomView = LiBottomView()
+    
+    private var puzzles = [Puzzle]()
+    private var copyPuzzles = [Puzzle]()
+    
+    private var tempCopyPuzzle: Puzzle?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,8 +79,33 @@ class ViewController: UIViewController {
         view.addSubview(bottomView)
         bottomView.viewModels = puzzles
         self.bottomView = bottomView
+        
+        bottomView.moveBegin = {
+            self.tempCopyPuzzle = Puzzle(size: $0.frame.size, isCopy: true)
+            self.tempCopyPuzzle?.image = $0.image
+            self.tempCopyPuzzle?.tag = $0.tag
+            self.view.addSubview(self.tempCopyPuzzle!)
+        }
+        
+        bottomView.moveChanged = {
+            guard let tempPuzzle = self.tempCopyPuzzle else { return }
+            
+            // 超出底部功能栏位置后才显示
+            if $0.y < self.bottomView.top {
+                tempPuzzle.center = CGPoint(x: self.view.width - $0.x, y: $0.y)
+            }
+            
+        }
+        
         bottomView.moveEnd = {
+            guard let tempPuzzle = self.tempCopyPuzzle else { return }
+            tempPuzzle.removeFromSuperview()
+            
             let copyPuzzle = Puzzle(size: $0.frame.size, isCopy: true)
+            copyPuzzle.center = tempPuzzle.center
+            copyPuzzle.image = tempPuzzle.image
+            self.view.addSubview(copyPuzzle)
+            self.copyPuzzles.append(copyPuzzle)
         }
         
         

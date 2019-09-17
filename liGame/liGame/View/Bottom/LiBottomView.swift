@@ -12,9 +12,9 @@ class LiBottomView: UIView {
     var viewModels = [Puzzle]() {
         didSet { collectionView!.viewModels = viewModels }
     }
-    
-    var moveCell: ((Int, CGPoint) -> Void)?
-    var moveBegin: ((Int) -> Void)?
+
+    var moveBegin: ((Puzzle) -> Void)?
+    var moveChanged: ((CGPoint) -> Void)?
     var moveEnd: ((Puzzle) -> Void)?
     
     var tempPuzzle: Puzzle?
@@ -70,6 +70,8 @@ class LiBottomView: UIView {
         collectionView!.longTapBegan = {
             let center = $1
             let tempPuzzle = Puzzle(size: $0.frame.size, isCopy: false)
+            // 补上游戏索引 tag
+            tempPuzzle.tag = $0.tag
             tempPuzzle.image = $0.image
             tempPuzzle.center = center
             tempPuzzle.y += self.top
@@ -77,6 +79,8 @@ class LiBottomView: UIView {
             
             self.superview!.addSubview(tempPuzzle)
             tempPuzzle.updateEdge()
+            
+            self.moveBegin?(tempPuzzle)
         }
         collectionView!.longTapChange = {
             guard let tempPuzzle = self.tempPuzzle else { return }
@@ -94,9 +98,12 @@ class LiBottomView: UIView {
             if tempPuzzle.bottom > self.bottomPoint {
                 tempPuzzle.bottom = self.bottomPoint
             }
+            
+            self.moveChanged?(tempPuzzle.center)
         }
         collectionView!.longTapEnded = {
-            self.moveEnd?($0)
+            guard let tempPuzzle = self.tempPuzzle else { return }
+            self.moveEnd?(tempPuzzle)
         }
     }
 }

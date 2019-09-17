@@ -12,7 +12,7 @@ class LiBottomCollectionView: UICollectionView {
 
     var longTapBegan: ((Puzzle, CGPoint) -> ())?
     var longTapChange: ((CGPoint) -> ())?
-    var longTapEnded: ((Puzzle) -> ())?
+    var longTapEnded: (() -> ())?
     
 
     let cellIdentifier = "PJLineCollectionViewCell"
@@ -57,9 +57,10 @@ extension LiBottomCollectionView: UICollectionViewDataSource {
             self.longTapChange?($0)
         }
         cell.longTapEnded = {
-            self.longTapEnded?(self.viewModels[$0])
             self.viewModels.remove(at: $0)
             self.reloadData()
+            
+            self.longTapEnded?()
         }
         
         return cell
