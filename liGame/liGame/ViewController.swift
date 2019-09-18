@@ -14,7 +14,8 @@ class ViewController: UIViewController {
     private var bottomView = LiBottomView()
     
     private var puzzles = [Puzzle]()
-    private var copyPuzzles = [Puzzle]()
+    private var leftPuzzles = [Puzzle]()
+    private var rightPuzzles = [Puzzle]()
     
     private var tempCopyPuzzle: Puzzle?
     
@@ -80,10 +81,22 @@ class ViewController: UIViewController {
         bottomView.viewModels = puzzles
         self.bottomView = bottomView
         
-        bottomView.moveBegin = {
-            self.tempCopyPuzzle = Puzzle(size: $0.frame.size, isCopy: true)
-            self.tempCopyPuzzle?.image = $0.image
-            self.tempCopyPuzzle?.tag = $0.tag
+        bottomView.moveBegin = { puzzle in
+            self.view.addSubview(puzzle)
+            self.leftPuzzles.append(puzzle)
+            puzzle.updateEdge()
+            
+            puzzle.longTapChange = {
+                for copyPuzzle in self.rightPuzzles {
+                    if copyPuzzle.tag == puzzle.tag {
+                        copyPuzzle.copyPuzzleCenterChange(centerPoint: $0)
+                    }
+                }
+            }
+            
+            self.tempCopyPuzzle = Puzzle(size: puzzle.frame.size, isCopy: true)
+            self.tempCopyPuzzle?.image = puzzle.image
+            self.tempCopyPuzzle?.tag = puzzle.tag
             self.view.addSubview(self.tempCopyPuzzle!)
         }
         
@@ -92,7 +105,7 @@ class ViewController: UIViewController {
             
             // 超出底部功能栏位置后才显示
             if $0.y < self.bottomView.top {
-                tempPuzzle.center = CGPoint(x: self.view.width - $0.x, y: $0.y)
+                tempPuzzle.copyPuzzleCenterChange(centerPoint: $0)
             }
             
         }
@@ -104,8 +117,9 @@ class ViewController: UIViewController {
             let copyPuzzle = Puzzle(size: $0.frame.size, isCopy: true)
             copyPuzzle.center = tempPuzzle.center
             copyPuzzle.image = tempPuzzle.image
+            copyPuzzle.tag = tempPuzzle.tag
             self.view.addSubview(copyPuzzle)
-            self.copyPuzzles.append(copyPuzzle)
+            self.rightPuzzles.append(copyPuzzle)
         }
         
         

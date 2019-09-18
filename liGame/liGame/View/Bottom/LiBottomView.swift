@@ -77,9 +77,6 @@ class LiBottomView: UIView {
             tempPuzzle.y += self.top
             self.tempPuzzle = tempPuzzle
             
-            self.superview!.addSubview(tempPuzzle)
-            tempPuzzle.updateEdge()
-            
             self.moveBegin?(tempPuzzle)
         }
         collectionView!.longTapChange = {

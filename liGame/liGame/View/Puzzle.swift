@@ -10,10 +10,8 @@ import UIKit
 
 class Puzzle: UIImageView {
 
-    var longTapBegan: ((Int) -> ())?
     var longTapChange: ((CGPoint) -> ())?
-    var longTapEnded: ((Int) -> ())?
-    
+
     /// 是否为「拷贝」拼图元素
     private var isCopy = false
     private var rightPoint: CGFloat = 0
@@ -46,14 +44,14 @@ class Puzzle: UIImageView {
         if !isCopy {
             isUserInteractionEnabled = true
             
-            let panGesture = UILongPressGestureRecognizer(target: self, action: .longTap)
+            let panGesture = UIPanGestureRecognizer(target: self, action: .pan)
             self.addGestureRecognizer(panGesture)
         } else {
             transform = CGAffineTransform(scaleX: -1, y: 1)
         }
     }
     
-    
+    /// 更新边界
     func updateEdge() {
         if superview != nil {
             if !isCopy {
@@ -72,62 +70,51 @@ class Puzzle: UIImageView {
         }
     }
     
+    /// 移动 `rightPuzzle`
+    func copyPuzzleCenterChange(centerPoint: CGPoint) {
+        if !isCopy { return }
+        
+        center = CGPoint(x: screenWidth - centerPoint.x, y: centerPoint.y)
+    }
+    
 }
 
 
 extension Puzzle {
     @objc
-    fileprivate func longTap(_ longTapGesture: UILongPressGestureRecognizer) {
+    fileprivate func pan(_ panGesture: UIPanGestureRecognizer) {
+        let translation = panGesture.translation(in: superview)
         
-        switch longTapGesture.state {
+        switch panGesture.state {
         case .began:
-            longTapBegan?(tag)
+            layer.borderColor = UIColor.white.cgColor
+            layer.borderWidth = 1
         case .changed:
-            var translation = longTapGesture.location(in: superview)
-            
-            let itemCount = 5
-            if tag > itemCount {
-                translation.x = translation.x - CGFloat(tag / itemCount * Int(screenWidth))
+            if right > rightPoint {
+                right = rightPoint
+            }
+            if left < leftaPoint {
+                left = leftaPoint
+            }
+            if top < topPoint {
+                top = topPoint
+            }
+            if bottom > bottomPoint {
+                bottom = bottomPoint
             }
             
-            let point = CGPoint(x: translation.x, y: translation.y)
-            longTapChange?(point)
         case .ended:
-            longTapEnded?(tag)
+            layer.borderWidth = 0
         default: break
         }
         
+        center = CGPoint(x: center.x + translation.x, y: center.y + translation.y)
+        panGesture.setTranslation(.zero, in: superview)
         
-//        let translation = panGesture.translation(in: superview)
-//
-//        switch panGesture.state {
-//        case .began:
-//            layer.borderColor = UIColor.white.cgColor
-//            layer.borderWidth = 1
-//        case .changed:
-//            if right > rightPoint {
-//                right = rightPoint
-//            }
-//            if left < leftaPoint {
-//                left = leftaPoint
-//            }
-//            if top < topPoint {
-//                top = topPoint
-//            }
-//            if bottom > bottomPoint {
-//                bottom = bottomPoint
-//            }
-//
-//        case .ended:
-//            layer.borderWidth = 0
-//        default: break
-//        }
-//
-//        center = CGPoint(x: center.x + translation.x, y: center.y + translation.y)
-//        panGesture.setTranslation(.zero, in: superview)
+        longTapChange?(center)
     }
 }
 
 private extension Selector {
-    static let longTap = #selector(Puzzle.longTap(_:))
+    static let pan = #selector(Puzzle.pan(_:))
 }
