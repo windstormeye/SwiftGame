@@ -10,7 +10,8 @@ import UIKit
 
 class Puzzle: UIImageView {
 
-    var longTapChange: ((CGPoint) -> ())?
+    var panChange: ((CGPoint) -> ())?
+    var panEnded: (() -> ())?
 
     /// 是否为「拷贝」拼图元素
     private var isCopy = false
@@ -105,13 +106,14 @@ extension Puzzle {
             
         case .ended:
             layer.borderWidth = 0
+            self.panEnded?()
         default: break
         }
         
         center = CGPoint(x: center.x + translation.x, y: center.y + translation.y)
         panGesture.setTranslation(.zero, in: superview)
         
-        longTapChange?(center)
+        panChange?(center)
     }
 }
 

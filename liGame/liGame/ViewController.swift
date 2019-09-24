@@ -51,8 +51,8 @@ class ViewController: UIViewController {
         imgView.image = UIGraphicsGetImageFromCurrentImageContext()
         
         // 一行六个
-        let itemHCount = 6
-        let itemW = Int(view.width / CGFloat(itemHCount))
+        let itemHCount = 3
+        let itemW = Int(view.width / CGFloat(itemHCount * 2))
         let itemVCount = Int(contentImageView.height / CGFloat(itemW))
         
         for itemY in 0..<itemVCount {
@@ -86,10 +86,19 @@ class ViewController: UIViewController {
             self.leftPuzzles.append(puzzle)
             puzzle.updateEdge()
             
-            puzzle.longTapChange = {
+            puzzle.panChange = {
                 for copyPuzzle in self.rightPuzzles {
                     if copyPuzzle.tag == puzzle.tag {
                         copyPuzzle.copyPuzzleCenterChange(centerPoint: $0)
+                    }
+                }
+            }
+            
+            puzzle.panEnded = {
+                for copyPuzzle in self.rightPuzzles {
+                    if copyPuzzle.tag == puzzle.tag {
+                        copyPuzzle.copyPuzzleCenterChange(centerPoint: puzzle.center)
+                        self.adsorb()
                     }
                 }
             }
@@ -120,6 +129,8 @@ class ViewController: UIViewController {
             copyPuzzle.tag = tempPuzzle.tag
             self.view.addSubview(copyPuzzle)
             self.rightPuzzles.append(copyPuzzle)
+            
+            self.adsorb()
         }
         
         
@@ -128,5 +139,38 @@ class ViewController: UIViewController {
         })
         
     }
+    
+    
+    /// 启动磁吸
+    private func adsorb() {
+        guard let tempPuzzle = self.leftPuzzles.last else { return }
+        
+        var tempPuzzleCenterPoint = tempPuzzle.center
+        
+        var tempPuzzleXIndex = CGFloat(Int(tempPuzzleCenterPoint.x / tempPuzzle.width))
+        if Int(tempPuzzleCenterPoint.x) % Int(tempPuzzle.width) > 0 {
+            tempPuzzleXIndex += 1
+        }
+        
+        var tempPuzzleYIndex = CGFloat(Int(tempPuzzleCenterPoint.y / tempPuzzle.height))
+        if Int(tempPuzzleCenterPoint.y) % Int(tempPuzzle.height) > 0 {
+            tempPuzzleYIndex += 1
+        }
+        
+        
+        let Xedge = tempPuzzleXIndex * tempPuzzle.width
+        let Yedge = tempPuzzleYIndex * tempPuzzle.height
+        
+        if tempPuzzleCenterPoint.x < Xedge {
+            tempPuzzleCenterPoint.x = Xedge - tempPuzzle.width / 2
+        }
+        
+        if tempPuzzleCenterPoint.y < Yedge {
+            tempPuzzleCenterPoint.y = Yedge  - tempPuzzle.height / 2
+        }
+        
+        tempPuzzle.center = tempPuzzleCenterPoint
+    }
+    
 }
 
