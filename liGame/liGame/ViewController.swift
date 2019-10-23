@@ -98,7 +98,7 @@ class ViewController: UIViewController {
                 for copyPuzzle in self.rightPuzzles {
                     if copyPuzzle.tag == puzzle.tag {
                         copyPuzzle.copyPuzzleCenterChange(centerPoint: puzzle.center)
-                        self.adsorb()
+                        self.adsorb(puzzle)
                     }
                 }
             }
@@ -130,7 +130,11 @@ class ViewController: UIViewController {
             self.view.addSubview(copyPuzzle)
             self.rightPuzzles.append(copyPuzzle)
             
-            self.adsorb()
+            self.adsorb(self.leftPuzzles.last!)
+        
+            if self.isWin() {
+                print("你赢了")
+            }
         }
         
         
@@ -142,9 +146,7 @@ class ViewController: UIViewController {
     
     
     /// 启动磁吸
-    private func adsorb() {
-        guard let tempPuzzle = self.leftPuzzles.last else { return }
-        
+    private func adsorb(_ tempPuzzle: Puzzle) {
         var tempPuzzleCenterPoint = tempPuzzle.center
         
         var tempPuzzleXIndex = CGFloat(Int(tempPuzzleCenterPoint.x / tempPuzzle.width))
@@ -170,6 +172,33 @@ class ViewController: UIViewController {
         }
         
         tempPuzzle.center = tempPuzzleCenterPoint
+    }
+    
+    /// 判赢算法
+    // TODO: 算法验证
+    private func isWin() -> Bool {
+        // 第一个元素不是零
+        if self.leftPuzzles.first?.tag != 0 {
+            return false
+        }
+        
+        var winCount = 0
+        for (index, puzzle) in self.leftPuzzles.enumerated() {
+            if index + 1 <= self.leftPuzzles.count - 1 {
+                let nextPuzzle = self.leftPuzzles[index + 1]
+                if nextPuzzle.tag - puzzle.tag == 1 {
+                    winCount += 1
+                    continue
+                } else {
+                    return false
+                }
+            }
+        }
+        
+        if winCount == puzzles.count - 1 {
+            return true
+        }
+        return false
     }
     
 }
