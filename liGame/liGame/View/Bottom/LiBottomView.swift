@@ -118,10 +118,3 @@ extension LiBottomView {
 private extension Selector {
     static let pan = #selector(LiBottomView.pan(_:))
 }
-
-
-//extension LiBottomView: LiBottomCollectionViewDelegate {
-//    func collectionViewCellLongPress(_ cellIndex: Int) {
-//
-//    }
-//}

@@ -99,6 +99,9 @@ class ViewController: UIViewController {
                     if copyPuzzle.tag == puzzle.tag {
                         copyPuzzle.copyPuzzleCenterChange(centerPoint: puzzle.center)
                         self.adsorb(puzzle)
+                        if self.isWin() {
+                            print("你赢了")
+                        }
                     }
                 }
             }
@@ -124,13 +127,13 @@ class ViewController: UIViewController {
             tempPuzzle.removeFromSuperview()
             
             let copyPuzzle = Puzzle(size: $0.frame.size, isCopy: true)
-            copyPuzzle.center = tempPuzzle.center
             copyPuzzle.image = tempPuzzle.image
             copyPuzzle.tag = tempPuzzle.tag
             self.view.addSubview(copyPuzzle)
             self.rightPuzzles.append(copyPuzzle)
             
             self.adsorb(self.leftPuzzles.last!)
+            copyPuzzle.copyPuzzleCenterChange(centerPoint: self.leftPuzzles.last!.center)
         
             if self.isWin() {
                 print("你赢了")
@@ -195,7 +198,8 @@ class ViewController: UIViewController {
             }
         }
         
-        if winCount == puzzles.count - 1 {
+//        puzzles.count - 1
+        if winCount == 4 {
             return true
         }
         return false
