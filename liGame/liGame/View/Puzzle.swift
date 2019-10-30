@@ -12,7 +12,12 @@ class Puzzle: UIImageView {
 
     var panChange: ((CGPoint) -> ())?
     var panEnded: (() -> ())?
-
+    var beginMovedPoint = CGPoint()
+    // 当前在 X 轴上的位置
+    var Xindex: Int?
+    // 当前在 Y 轴上的位置
+    var Yindex: Int?
+    
     /// 是否为「拷贝」拼图元素
     private var isCopy = false
     private var rightPoint: CGFloat = 0
@@ -88,6 +93,7 @@ extension Puzzle {
         
         switch panGesture.state {
         case .began:
+            beginMovedPoint = center
             layer.borderColor = UIColor.white.cgColor
             layer.borderWidth = 1
         case .changed:

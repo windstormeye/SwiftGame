@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     private var bottomView = LiBottomView()
     
     private var puzzles = [Puzzle]()
+    private var defaultPuzzles = [Puzzle]()
+    private var finalPuzzleTags = [[Int]]()
     private var leftPuzzles = [Puzzle]()
     private var rightPuzzles = [Puzzle]()
     
@@ -55,6 +57,8 @@ class ViewController: UIViewController {
         let itemW = Int(view.width / CGFloat(itemHCount * 2))
         let itemVCount = Int(contentImageView.height / CGFloat(itemW))
         
+        finalPuzzleTags = Array(repeating: Array(repeating: -1, count: itemHCount), count: itemVCount)
+        
         for itemY in 0..<itemVCount {
             for itemX in 0..<itemHCount {
                 let x = itemW * itemX
@@ -65,6 +69,7 @@ class ViewController: UIViewController {
                 puzzle.image = img
                 puzzle.tag = (itemY * itemHCount) + itemX
                 puzzles.append(puzzle)
+                defaultPuzzles.append(puzzle)
             }
         }
         
@@ -97,8 +102,8 @@ class ViewController: UIViewController {
             puzzle.panEnded = {
                 for copyPuzzle in self.rightPuzzles {
                     if copyPuzzle.tag == puzzle.tag {
-                        copyPuzzle.copyPuzzleCenterChange(centerPoint: puzzle.center)
                         self.adsorb(puzzle)
+                        copyPuzzle.copyPuzzleCenterChange(centerPoint: puzzle.center)
                         if self.isWin() {
                             print("你赢了")
                         }
@@ -174,32 +179,45 @@ class ViewController: UIViewController {
             tempPuzzleCenterPoint.y = Yedge  - tempPuzzle.height / 2
         }
         
-        tempPuzzle.center = tempPuzzleCenterPoint
+        // 已经有的不能占据
+        if (self.finalPuzzleTags[Int(tempPuzzleYIndex - 1)][Int(tempPuzzleXIndex - 1)] == -1) {
+            self.finalPuzzleTags[Int(tempPuzzleYIndex - 1)][Int(tempPuzzleXIndex - 1)] = tempPuzzle.tag
+            
+            
+            if ((tempPuzzle.Xindex != nil) && (tempPuzzle.Yindex != nil)) {
+                self.finalPuzzleTags[tempPuzzle.Xindex!][tempPuzzle.Yindex!] = -1
+            }
+            
+            tempPuzzle.Xindex = Int(tempPuzzleYIndex - 1)
+            tempPuzzle.Yindex = Int(tempPuzzleXIndex - 1)
+            
+            tempPuzzle.center = tempPuzzleCenterPoint
+        } else {
+            tempPuzzle.center = tempPuzzle.beginMovedPoint
+        }
     }
     
     /// 判赢算法
     // TODO: 算法验证
     private func isWin() -> Bool {
-        // 第一个元素不是零
-        if self.leftPuzzles.first?.tag != 0 {
-            return false
-        }
         
         var winCount = 0
-        for (index, puzzle) in self.leftPuzzles.enumerated() {
-            if index + 1 <= self.leftPuzzles.count - 1 {
-                let nextPuzzle = self.leftPuzzles[index + 1]
-                if nextPuzzle.tag - puzzle.tag == 1 {
-                    winCount += 1
-                    continue
-                } else {
-                    return false
+        for (Vindex, HTags) in self.finalPuzzleTags.enumerated() {
+            for (Hindex, tag) in HTags.enumerated() {
+                let currentIndex = Vindex * 3 + Hindex
+                if leftPuzzles.count - 1 >= currentIndex {
+                    print("%d, %d", leftPuzzles[currentIndex].tag, tag)
+                    if leftPuzzles[currentIndex].tag == tag {
+                        winCount += 1
+                        continue
+                    }
                 }
+                
+                return false
             }
         }
         
-//        puzzles.count - 1
-        if winCount == 4 {
+        if winCount == puzzles.count - 1 {
             return true
         }
         return false
