@@ -179,6 +179,11 @@ class ViewController: UIViewController {
             tempPuzzleCenterPoint.y = Yedge  - tempPuzzle.height / 2
         }
         
+        // 超出最下边
+        if (Int(tempPuzzleYIndex) > self.finalPuzzleTags.count) {
+            tempPuzzle.center = tempPuzzle.beginMovedPoint
+        }
+        
         // 已经有的不能占据
         if (self.finalPuzzleTags[Int(tempPuzzleYIndex - 1)][Int(tempPuzzleXIndex - 1)] == -1) {
             self.finalPuzzleTags[Int(tempPuzzleYIndex - 1)][Int(tempPuzzleXIndex - 1)] = tempPuzzle.tag
@@ -205,9 +210,9 @@ class ViewController: UIViewController {
         for (Vindex, HTags) in self.finalPuzzleTags.enumerated() {
             for (Hindex, tag) in HTags.enumerated() {
                 let currentIndex = Vindex * 3 + Hindex
-                if leftPuzzles.count - 1 >= currentIndex {
-                    print("%d, %d", leftPuzzles[currentIndex].tag, tag)
-                    if leftPuzzles[currentIndex].tag == tag {
+                if defaultPuzzles.count - 1 >= currentIndex {
+                    print("%d, %d", defaultPuzzles[currentIndex].tag, tag)
+                    if defaultPuzzles[currentIndex].tag == tag {
                         winCount += 1
                         continue
                     }
@@ -217,7 +222,7 @@ class ViewController: UIViewController {
             }
         }
         
-        if winCount == puzzles.count - 1 {
+        if winCount == defaultPuzzles.count {
             return true
         }
         return false
