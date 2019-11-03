@@ -55,6 +55,7 @@ class ViewController: UIViewController {
         // 一行六个
         let itemHCount = 3
         let itemW = Int(view.width / CGFloat(itemHCount * 2))
+        let itemH = itemW
         let itemVCount = Int(contentImageView.height / CGFloat(itemW))
         
         finalPuzzleTags = Array(repeating: Array(repeating: -1, count: itemHCount), count: itemVCount)
@@ -64,7 +65,15 @@ class ViewController: UIViewController {
                 let x = itemW * itemX
                 let y = itemW * itemY
                 
-                let img = contentImageView.image!.image(with: CGRect(x: x, y: y, width: itemW, height: itemW))
+                var finalItemW = itemW
+                var finalItemH = itemH
+            
+                //
+                if itemX == itemHCount - 1 {
+                    finalItemW = itemW / 3 * 2 + 2
+                }
+                
+                let img = contentImageView.image!.image(with: CGRect(x: x, y: y, width: finalItemW, height: finalItemH))
                 let puzzle = Puzzle(size: CGSize(width: itemW, height: itemW), isCopy: false)
                 puzzle.image = img
                 puzzle.tag = (itemY * itemHCount) + itemX
@@ -172,11 +181,20 @@ class ViewController: UIViewController {
         let Yedge = tempPuzzleYIndex * tempPuzzle.height
         
         if tempPuzzleCenterPoint.x < Xedge {
+            // 当为每行最后一个时，设置 contentMode 为 left
+            if (Int(tempPuzzleXIndex) == finalPuzzleTags[0].count) {
+                tempPuzzle.contentMode = .left
+            }
             tempPuzzleCenterPoint.x = Xedge - tempPuzzle.width / 2
         }
         
         if tempPuzzleCenterPoint.y < Yedge {
-            tempPuzzleCenterPoint.y = Yedge  - tempPuzzle.height / 2
+            // 当为最后一列时，往上移 20
+            if (Int(tempPuzzleYIndex) == finalPuzzleTags.count) {
+                tempPuzzleCenterPoint.y = Yedge  - tempPuzzle.height / 2 - 20
+            } else {
+                tempPuzzleCenterPoint.y = Yedge  - tempPuzzle.height / 2
+            }
         }
         
         // 超出最下边
@@ -211,7 +229,6 @@ class ViewController: UIViewController {
             for (Hindex, tag) in HTags.enumerated() {
                 let currentIndex = Vindex * 3 + Hindex
                 if defaultPuzzles.count - 1 >= currentIndex {
-                    print("%d, %d", defaultPuzzles[currentIndex].tag, tag)
                     if defaultPuzzles[currentIndex].tag == tag {
                         winCount += 1
                         continue
