@@ -45,7 +45,8 @@ class Puzzle: UIImageView {
     // MARK: Init
     
     private func initView() {
-        contentMode = .scaleAspectFit
+        // 全部靠左，copyPuzzle 镜像对称
+        contentMode = .left
         
         if !isCopy {
             isUserInteractionEnabled = true
@@ -79,7 +80,6 @@ class Puzzle: UIImageView {
     /// 移动 `rightPuzzle`
     func copyPuzzleCenterChange(centerPoint: CGPoint) {
         if !isCopy { return }
-        
         center = CGPoint(x: screenWidth - centerPoint.x, y: centerPoint.y)
     }
     

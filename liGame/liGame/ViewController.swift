@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, PJParticleAnimationable {
 
     private var lineImageView = UIImageView()
     private var bottomView = LiBottomView()
@@ -25,7 +25,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .bgColor
-        
+        self.winLabel.isHidden = true
+
         
         // 底图适配
         let contentImage = UIImage(named: "01")!
@@ -113,9 +114,7 @@ class ViewController: UIViewController {
                     if copyPuzzle.tag == puzzle.tag {
                         self.adsorb(puzzle)
                         copyPuzzle.copyPuzzleCenterChange(centerPoint: puzzle.center)
-                        if self.isWin() {
-                            print("你赢了")
-                        }
+                        if self.isWin() { self.winAnimate() }
                     }
                 }
             }
@@ -149,9 +148,7 @@ class ViewController: UIViewController {
             self.adsorb(self.leftPuzzles.last!)
             copyPuzzle.copyPuzzleCenterChange(centerPoint: self.leftPuzzles.last!.center)
         
-            if self.isWin() {
-                print("你赢了")
-            }
+            if self.isWin() { self.winAnimate() }
         }
         
         
@@ -181,10 +178,6 @@ class ViewController: UIViewController {
         let Yedge = tempPuzzleYIndex * tempPuzzle.height
         
         if tempPuzzleCenterPoint.x < Xedge {
-            // 当为每行最后一个时，设置 contentMode 为 left
-            if (Int(tempPuzzleXIndex) == finalPuzzleTags[0].count) {
-                tempPuzzle.contentMode = .left
-            }
             tempPuzzleCenterPoint.x = Xedge - tempPuzzle.width / 2
         }
         
@@ -244,6 +237,59 @@ class ViewController: UIViewController {
         }
         return false
     }
-    
-}
 
+        
+    private func winAnimate() {
+        startParticleAnimation(CGPoint(x: screenWidth / 2, y: screenHeight - 10))
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            self.bottomView.top = screenHeight
+        })
+        
+        for sv in self.view.subviews {
+            sv.removeFromSuperview()
+        }
+        
+        self.winLabel.isHidden = false
+        let finalManContentView = UIImageView(frame: CGRect(x: 0, y: 0,
+                                                            width: screenWidth,
+                                                            height: screenHeight - 64))
+        finalManContentView.image = UIImage(named: "finalManContent")
+        self.view.addSubview(finalManContentView)
+        
+        let finalMan = UIImageView(frame: CGRect(x: 0, y: 0,
+                                                 width: finalManContentView.width * 0.85,
+                                                 height: finalManContentView.width * 0.8 * 0.85))
+        finalMan.center = self.view.center
+        finalMan.image = UIImage(named: "finalMan")
+        self.view.addSubview(finalMan)
+        
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            finalMan.transform = CGAffineTransform(rotationAngle: 0.25)
+        }) { (finished) in
+            UIView.animate(withDuration: 0.5, animations: {
+                finalMan.transform = CGAffineTransform(rotationAngle: -0.25)
+            }, completion: { (finished) in
+                UIView.animate(withDuration: 0.5, animations: {
+                    finalMan.transform = CGAffineTransform(rotationAngle: 0)
+                })
+            })
+        }
+    }
+    
+    
+    // MARK: - Lazy
+    lazy var winLabel: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: screenHeight - 64,
+                                          width: screenWidth, height: 64))
+        label.centerX = view.centerX
+        label.font = UIFont.systemFont(ofSize: 40,
+                                       weight: UIFont.Weight.light)
+        label.text = "Dàlì shén"
+        label.textAlignment = .center
+        label.textColor = .white
+        view.addSubview(label)
+        return label
+    }()
+}
