@@ -151,17 +151,17 @@ class GameManager: ObservableObject {
     /// - Parameter lightSequence: 亮灯序列
     private func updateLightStatus(_ lightSequence: [Int]) {
         guard let size = size else { return }
-        
         for lightIndex in lightSequence {
-            var row = lightIndex / size
+            var index = lightIndex
+            // 防止数组越出最大边界处
+            if index >= size * size {
+                index = size * size - 1
+            }
+            let row = lightIndex / size
             let column = lightIndex % size
-            
             // column 不为 0，说明非最后一个
             // row 为 0，说明为第一行
-            if column > 0 && row >= 0 {
-                row += 1
-            }
-            updateLightStatus(column: column - 1, row: row - 1)
+            updateLightStatus(column: column, row: row)
         }
     }
     
