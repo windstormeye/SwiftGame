@@ -214,7 +214,6 @@ class ViewController: UIViewController, PJParticleAnimationable {
     }
     
     /// 判赢算法
-    // TODO: 算法验证
     private func isWin() -> Bool {
         
         var winCount = 0

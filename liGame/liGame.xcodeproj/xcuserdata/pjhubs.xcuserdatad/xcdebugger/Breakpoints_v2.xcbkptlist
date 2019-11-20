@@ -7,16 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "41BEDBB4-FFF1-4853-800C-A0B6413C100B"
-            shouldBeEnabled = "Yes"
+            uuid = "A5B13F0E-35B7-4822-9716-FBC061A7B51E"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "liGame/View/Bottom/LiBottomCollectionViewCell.swift"
+            filePath = "liGame/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "longTap(_:)"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "adsorb(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7952585F-5F4C-4FF5-8CF8-A906DBFE5810"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "liGame/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
+            landmarkName = "adsorb(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
