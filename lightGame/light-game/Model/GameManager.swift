@@ -34,6 +34,11 @@ class GameManager: ObservableObject {
     private var timer: Timer?
     /// 游戏持续时间
     private var durations = 1
+    private var gameController = GameController()
+    private var row = 0
+    private var column = 0
+    private var pRow = 0
+    private var pColumn = 0
     
     // MARK: - Init
     
@@ -58,6 +63,7 @@ class GameManager: ObservableObject {
         self.size = size
         lights = Array(repeating: Array(repeating: Light(), count: size), count: size)
         
+        initGameController()
         start(lightSequence)
     }
     
@@ -165,6 +171,14 @@ class GameManager: ObservableObject {
         }
     }
     
+    private func updateLightSelected() {
+        lights[pColumn][pRow].selected = false
+        lights[column][row].selected = true
+        
+        pRow = row
+        pColumn = column
+    }
+    
     /// 判赢
     private func updateGameStatus() {
         guard let size = size else { return }
@@ -188,6 +202,41 @@ class GameManager: ObservableObject {
             timerStop()
             currentStatus = .win
             return
+        }
+    }
+    
+    private func initGameController() {
+        gameController.isSelectX = {
+            if $0 {
+                if (self.row < self.lights.count - 1) {
+                    self.row += 1
+                }
+            } else {
+                if self.row > 0 {
+                    self.row -= 1
+                }
+            }
+            
+            self.updateLightSelected()
+        }
+        
+        gameController.isSelectY = {
+            if $0 {
+                if (self.column > 0) {
+                    self.column -= 1
+                }
+            } else {
+                if (self.column < self.lights.count - 1) {
+                    self.column += 1
+                }
+            }
+            
+            self.updateLightSelected()
+        }
+        
+        gameController.isTapButtonA = {
+            self.clickTimes += 1
+            self.updateLightStatus(column: self.row, row: self.column)
         }
     }
 }

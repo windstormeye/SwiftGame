@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import GameController
 
 class ViewController: UIViewController {
     
@@ -18,6 +19,10 @@ class ViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         playView.presentScene(BGPlayScene())
+        
+        for gcController in GCController.controllers() {
+            gcController.extendedGamepad.bu
+        }
     }
     
     lazy var playView: BGPlayView = {

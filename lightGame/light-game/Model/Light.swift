@@ -11,4 +11,7 @@ import Foundation
 struct Light {
     /// 开关状态
     var status = false
+    
+    /// 选中状态
+    var selected = false
 }
