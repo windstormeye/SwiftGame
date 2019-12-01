@@ -40,6 +40,9 @@ class GameManager: ObservableObject {
     private var pRow = 0
     private var pColumn = 0
     
+    /// 游戏控制器暂停
+    private var isPause = false
+    
     // MARK: - Init
     
     /// 便捷构造方法
@@ -96,6 +99,7 @@ class GameManager: ObservableObject {
     
     /// 重新创建
     func timerRestart() {
+        isPause = false
         durations = 0
         timeString = "00:00"
         timer?.fireDate = Date()
@@ -124,8 +128,10 @@ class GameManager: ObservableObject {
     /// - Parameters:
     ///   - column: 灯-列索引
     ///   - size: 灯-行索引
-    func updateLightStatus(column: Int, row: Int) {
+    func updateLightStatus(column: Int, row: Int, userTouch: Bool) {
         lights[row][column].status.toggle()
+        self.column = row
+        self.row = column
         
         // 上
         let top = row - 1
@@ -149,6 +155,10 @@ class GameManager: ObservableObject {
         }
         
         updateGameStatus()
+        
+        if (userTouch) {
+            disSelectedGameControllerStatus()
+        }
     }
     
     // MARK: Private
@@ -167,7 +177,7 @@ class GameManager: ObservableObject {
             let column = lightIndex % size
             // column 不为 0，说明非最后一个
             // row 为 0，说明为第一行
-            updateLightStatus(column: column, row: row)
+            updateLightStatus(column: column, row: row, userTouch: true)
         }
     }
     
@@ -177,6 +187,10 @@ class GameManager: ObservableObject {
         
         pRow = row
         pColumn = column
+    }
+    
+    private func disSelectedGameControllerStatus() {
+        lights[pColumn][pRow].selected = false
     }
     
     /// 判赢
@@ -201,12 +215,15 @@ class GameManager: ObservableObject {
         if lightingCount == 0 {
             timerStop()
             currentStatus = .win
+            isPause = true
             return
         }
     }
     
     private func initGameController() {
         gameController.isSelectX = {
+            guard !self.isPause else { return }
+            
             if $0 {
                 if (self.row < self.lights.count - 1) {
                     self.row += 1
@@ -221,6 +238,8 @@ class GameManager: ObservableObject {
         }
         
         gameController.isSelectY = {
+            guard !self.isPause else { return }
+            
             if $0 {
                 if (self.column > 0) {
                     self.column -= 1
@@ -236,7 +255,7 @@ class GameManager: ObservableObject {
         
         gameController.isTapButtonA = {
             self.clickTimes += 1
-            self.updateLightStatus(column: self.row, row: self.column)
+            self.updateLightStatus(column: self.row, row: self.column, userTouch: false)
         }
     }
 }

@@ -39,7 +39,7 @@ struct ContentView: View {
                             .overlay(RoundedRectangle(cornerRadius: self.gameManager.lights[row][column].selected ? self.gameManager.circleWidth() : 0 ).stroke(Color.black, lineWidth: self.gameManager.lights[row][column].selected ? 5 : 0 ))
                             .onTapGesture {
                                 self.gameManager.clickTimes += 1
-                                self.gameManager.updateLightStatus(column: column, row: row)
+                                self.gameManager.updateLightStatus(column: column, row: row, userTouch: true)
                         }
                     }
                 }
