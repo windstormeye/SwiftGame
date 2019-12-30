@@ -46,6 +46,7 @@ extension GameController {
     }
     
     private func controllerInput(gamePad: GCExtendedGamepad, element: GCControllerElement) {
+        // gamePad 为支持的类型，element 为当前手柄的输入
         // 不能 return，因为单次出发会带入多个按键的值
         
         if (gamePad.leftThumbstick == element) {
@@ -70,13 +71,13 @@ extension GameController {
             if (gamePad.dpad.xAxis.value != 0) {
                 isSelectX?(gamePad.dpad.xAxis.value > 0)
             } else if (gamePad.dpad.xAxis.value == 0) {
-                // YOU CAN PUT CODE HERE TO STOP YOUR PLAYER FROM MOVING
+                
             }
             
             if (gamePad.dpad.yAxis.value != 0) {
                 isSelectY?(gamePad.dpad.yAxis.value > 0)
             } else if (gamePad.dpad.yAxis.value == 0) {
-                // YOU CAN PUT CODE HERE TO STOP YOUR PLAYER FROM MOVING
+                
             }
         } else if (gamePad.buttonA == element) {
             if (gamePad.buttonA.value != 0) {

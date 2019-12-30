@@ -7,31 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0CA003D123858F3F00EE5A40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA003D023858F3F00EE5A40 /* AppDelegate.swift */; };
-		0CA003D323858F3F00EE5A40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA003D223858F3F00EE5A40 /* SceneDelegate.swift */; };
-		0CA003D523858F3F00EE5A40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA003D423858F3F00EE5A40 /* ViewController.swift */; };
-		0CA003D823858F3F00EE5A40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CA003D623858F3F00EE5A40 /* Main.storyboard */; };
-		0CA003DA23858F4100EE5A40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CA003D923858F4100EE5A40 /* Assets.xcassets */; };
-		0CA003DD23858F4100EE5A40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CA003DB23858F4100EE5A40 /* LaunchScreen.storyboard */; };
-		0CA003E5238C20DA00EE5A40 /* BGPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA003E4238C20DA00EE5A40 /* BGPlayView.swift */; };
-		0CA003E7238C26C000EE5A40 /* BGPlayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA003E6238C26C000EE5A40 /* BGPlayScene.swift */; };
+		0C964EBD23B8E5D0001EA659 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C964EBC23B8E5D0001EA659 /* Ball.swift */; };
+		0CA02F8523AFAB7D004A580E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA02F8423AFAB7D004A580E /* AppDelegate.swift */; };
+		0CA02F8723AFAB7D004A580E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0CA02F8623AFAB7D004A580E /* GameScene.sks */; };
+		0CA02F8923AFAB7D004A580E /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0CA02F8823AFAB7D004A580E /* Actions.sks */; };
+		0CA02F8B23AFAB7D004A580E /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA02F8A23AFAB7D004A580E /* GameScene.swift */; };
+		0CA02F8D23AFAB7D004A580E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA02F8C23AFAB7D004A580E /* GameViewController.swift */; };
+		0CA02F9023AFAB7D004A580E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CA02F8E23AFAB7D004A580E /* Main.storyboard */; };
+		0CA02F9223AFAB7E004A580E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CA02F9123AFAB7E004A580E /* Assets.xcassets */; };
+		0CA02F9523AFAB7E004A580E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CA02F9323AFAB7E004A580E /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0CA003CD23858F3F00EE5A40 /* bouncesGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bouncesGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0CA003D023858F3F00EE5A40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0CA003D223858F3F00EE5A40 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0CA003D423858F3F00EE5A40 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		0CA003D723858F3F00EE5A40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0CA003D923858F4100EE5A40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0CA003DC23858F4100EE5A40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		0CA003DE23858F4100EE5A40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0CA003E4238C20DA00EE5A40 /* BGPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGPlayView.swift; sourceTree = "<group>"; };
-		0CA003E6238C26C000EE5A40 /* BGPlayScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGPlayScene.swift; sourceTree = "<group>"; };
+		0C964EBC23B8E5D0001EA659 /* Ball.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = "<group>"; };
+		0CA02F8123AFAB7D004A580E /* bounceGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bounceGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0CA02F8423AFAB7D004A580E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0CA02F8623AFAB7D004A580E /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		0CA02F8823AFAB7D004A580E /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		0CA02F8A23AFAB7D004A580E /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		0CA02F8C23AFAB7D004A580E /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		0CA02F8F23AFAB7D004A580E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0CA02F9123AFAB7E004A580E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0CA02F9423AFAB7E004A580E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0CA02F9623AFAB7E004A580E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0CA003CA23858F3F00EE5A40 /* Frameworks */ = {
+		0CA02F7E23AFAB7D004A580E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,74 +43,83 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0CA003C423858F3F00EE5A40 = {
+		0C964EBB23B8E5A6001EA659 /* Ball */ = {
 			isa = PBXGroup;
 			children = (
-				0CA003CF23858F3F00EE5A40 /* bouncesGame */,
-				0CA003CE23858F3F00EE5A40 /* Products */,
+				0C964EBC23B8E5D0001EA659 /* Ball.swift */,
+			);
+			path = Ball;
+			sourceTree = "<group>";
+		};
+		0CA02F7823AFAB7D004A580E = {
+			isa = PBXGroup;
+			children = (
+				0CA02F8323AFAB7D004A580E /* bounceGame */,
+				0CA02F8223AFAB7D004A580E /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		0CA003CE23858F3F00EE5A40 /* Products */ = {
+		0CA02F8223AFAB7D004A580E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0CA003CD23858F3F00EE5A40 /* bouncesGame.app */,
+				0CA02F8123AFAB7D004A580E /* bounceGame.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0CA003CF23858F3F00EE5A40 /* bouncesGame */ = {
+		0CA02F8323AFAB7D004A580E /* bounceGame */ = {
 			isa = PBXGroup;
 			children = (
-				0CA003D023858F3F00EE5A40 /* AppDelegate.swift */,
-				0CA003D223858F3F00EE5A40 /* SceneDelegate.swift */,
-				0CA003D423858F3F00EE5A40 /* ViewController.swift */,
-				0CA003E4238C20DA00EE5A40 /* BGPlayView.swift */,
-				0CA003E6238C26C000EE5A40 /* BGPlayScene.swift */,
-				0CA003D623858F3F00EE5A40 /* Main.storyboard */,
-				0CA003D923858F4100EE5A40 /* Assets.xcassets */,
-				0CA003DB23858F4100EE5A40 /* LaunchScreen.storyboard */,
-				0CA003DE23858F4100EE5A40 /* Info.plist */,
+				0CA02F8423AFAB7D004A580E /* AppDelegate.swift */,
+				0CA02F8623AFAB7D004A580E /* GameScene.sks */,
+				0CA02F8823AFAB7D004A580E /* Actions.sks */,
+				0CA02F8A23AFAB7D004A580E /* GameScene.swift */,
+				0CA02F8C23AFAB7D004A580E /* GameViewController.swift */,
+				0C964EBB23B8E5A6001EA659 /* Ball */,
+				0CA02F8E23AFAB7D004A580E /* Main.storyboard */,
+				0CA02F9123AFAB7E004A580E /* Assets.xcassets */,
+				0CA02F9323AFAB7E004A580E /* LaunchScreen.storyboard */,
+				0CA02F9623AFAB7E004A580E /* Info.plist */,
 			);
-			path = bouncesGame;
+			path = bounceGame;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0CA003CC23858F3F00EE5A40 /* bouncesGame */ = {
+		0CA02F8023AFAB7D004A580E /* bounceGame */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0CA003E123858F4100EE5A40 /* Build configuration list for PBXNativeTarget "bouncesGame" */;
+			buildConfigurationList = 0CA02F9923AFAB7E004A580E /* Build configuration list for PBXNativeTarget "bounceGame" */;
 			buildPhases = (
-				0CA003C923858F3F00EE5A40 /* Sources */,
-				0CA003CA23858F3F00EE5A40 /* Frameworks */,
-				0CA003CB23858F3F00EE5A40 /* Resources */,
+				0CA02F7D23AFAB7D004A580E /* Sources */,
+				0CA02F7E23AFAB7D004A580E /* Frameworks */,
+				0CA02F7F23AFAB7D004A580E /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = bouncesGame;
-			productName = bouncesGame;
-			productReference = 0CA003CD23858F3F00EE5A40 /* bouncesGame.app */;
+			name = bounceGame;
+			productName = bounceGame;
+			productReference = 0CA02F8123AFAB7D004A580E /* bounceGame.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		0CA003C523858F3F00EE5A40 /* Project object */ = {
+		0CA02F7923AFAB7D004A580E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastSwiftUpdateCheck = 1120;
+				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "翁培钧";
 				TargetAttributes = {
-					0CA003CC23858F3F00EE5A40 = {
-						CreatedOnToolsVersion = 11.0;
+					0CA02F8023AFAB7D004A580E = {
+						CreatedOnToolsVersion = 11.2.1;
 					};
 				};
 			};
-			buildConfigurationList = 0CA003C823858F3F00EE5A40 /* Build configuration list for PBXProject "bouncesGame" */;
+			buildConfigurationList = 0CA02F7C23AFAB7D004A580E /* Build configuration list for PBXProject "bounceGame" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -116,57 +127,58 @@
 				en,
 				Base,
 			);
-			mainGroup = 0CA003C423858F3F00EE5A40;
-			productRefGroup = 0CA003CE23858F3F00EE5A40 /* Products */;
+			mainGroup = 0CA02F7823AFAB7D004A580E;
+			productRefGroup = 0CA02F8223AFAB7D004A580E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0CA003CC23858F3F00EE5A40 /* bouncesGame */,
+				0CA02F8023AFAB7D004A580E /* bounceGame */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		0CA003CB23858F3F00EE5A40 /* Resources */ = {
+		0CA02F7F23AFAB7D004A580E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CA003DD23858F4100EE5A40 /* LaunchScreen.storyboard in Resources */,
-				0CA003DA23858F4100EE5A40 /* Assets.xcassets in Resources */,
-				0CA003D823858F3F00EE5A40 /* Main.storyboard in Resources */,
+				0CA02F9023AFAB7D004A580E /* Main.storyboard in Resources */,
+				0CA02F8723AFAB7D004A580E /* GameScene.sks in Resources */,
+				0CA02F9223AFAB7E004A580E /* Assets.xcassets in Resources */,
+				0CA02F9523AFAB7E004A580E /* LaunchScreen.storyboard in Resources */,
+				0CA02F8923AFAB7D004A580E /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0CA003C923858F3F00EE5A40 /* Sources */ = {
+		0CA02F7D23AFAB7D004A580E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CA003E7238C26C000EE5A40 /* BGPlayScene.swift in Sources */,
-				0CA003D523858F3F00EE5A40 /* ViewController.swift in Sources */,
-				0CA003D123858F3F00EE5A40 /* AppDelegate.swift in Sources */,
-				0CA003E5238C20DA00EE5A40 /* BGPlayView.swift in Sources */,
-				0CA003D323858F3F00EE5A40 /* SceneDelegate.swift in Sources */,
+				0C964EBD23B8E5D0001EA659 /* Ball.swift in Sources */,
+				0CA02F8B23AFAB7D004A580E /* GameScene.swift in Sources */,
+				0CA02F8D23AFAB7D004A580E /* GameViewController.swift in Sources */,
+				0CA02F8523AFAB7D004A580E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		0CA003D623858F3F00EE5A40 /* Main.storyboard */ = {
+		0CA02F8E23AFAB7D004A580E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0CA003D723858F3F00EE5A40 /* Base */,
+				0CA02F8F23AFAB7D004A580E /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		0CA003DB23858F4100EE5A40 /* LaunchScreen.storyboard */ = {
+		0CA02F9323AFAB7E004A580E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0CA003DC23858F4100EE5A40 /* Base */,
+				0CA02F9423AFAB7E004A580E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -174,7 +186,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		0CA003DF23858F4100EE5A40 /* Debug */ = {
+		0CA02F9723AFAB7E004A580E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -224,7 +236,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -234,7 +246,7 @@
 			};
 			name = Debug;
 		};
-		0CA003E023858F4100EE5A40 /* Release */ = {
+		0CA02F9823AFAB7E004A580E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -278,7 +290,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -288,36 +300,36 @@
 			};
 			name = Release;
 		};
-		0CA003E223858F4100EE5A40 /* Debug */ = {
+		0CA02F9A23AFAB7E004A580E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U6J5965DZK;
-				INFOPLIST_FILE = bouncesGame/Info.plist;
+				INFOPLIST_FILE = bounceGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pjhubs.bouncesGame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pjhubs.bounceGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		0CA003E323858F4100EE5A40 /* Release */ = {
+		0CA02F9B23AFAB7E004A580E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U6J5965DZK;
-				INFOPLIST_FILE = bouncesGame/Info.plist;
+				INFOPLIST_FILE = bounceGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pjhubs.bouncesGame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pjhubs.bounceGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -327,25 +339,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0CA003C823858F3F00EE5A40 /* Build configuration list for PBXProject "bouncesGame" */ = {
+		0CA02F7C23AFAB7D004A580E /* Build configuration list for PBXProject "bounceGame" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0CA003DF23858F4100EE5A40 /* Debug */,
-				0CA003E023858F4100EE5A40 /* Release */,
+				0CA02F9723AFAB7E004A580E /* Debug */,
+				0CA02F9823AFAB7E004A580E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0CA003E123858F4100EE5A40 /* Build configuration list for PBXNativeTarget "bouncesGame" */ = {
+		0CA02F9923AFAB7E004A580E /* Build configuration list for PBXNativeTarget "bounceGame" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0CA003E223858F4100EE5A40 /* Debug */,
-				0CA003E323858F4100EE5A40 /* Release */,
+				0CA02F9A23AFAB7E004A580E /* Debug */,
+				0CA02F9B23AFAB7E004A580E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 0CA003C523858F3F00EE5A40 /* Project object */;
+	rootObject = 0CA02F7923AFAB7D004A580E /* Project object */;
 }
