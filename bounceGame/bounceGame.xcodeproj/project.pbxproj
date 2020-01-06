@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C964EBD23B8E5D0001EA659 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C964EBC23B8E5D0001EA659 /* Ball.swift */; };
+		0C964EBF23BA3FDF001EA659 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C964EBE23BA3FDF001EA659 /* Define.swift */; };
 		0CA02F8523AFAB7D004A580E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA02F8423AFAB7D004A580E /* AppDelegate.swift */; };
 		0CA02F8723AFAB7D004A580E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0CA02F8623AFAB7D004A580E /* GameScene.sks */; };
 		0CA02F8923AFAB7D004A580E /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0CA02F8823AFAB7D004A580E /* Actions.sks */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		0C964EBC23B8E5D0001EA659 /* Ball.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = "<group>"; };
+		0C964EBE23BA3FDF001EA659 /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		0CA02F8123AFAB7D004A580E /* bounceGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bounceGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CA02F8423AFAB7D004A580E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CA02F8623AFAB7D004A580E /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				0CA02F8823AFAB7D004A580E /* Actions.sks */,
 				0CA02F8A23AFAB7D004A580E /* GameScene.swift */,
 				0CA02F8C23AFAB7D004A580E /* GameViewController.swift */,
+				0C964EBE23BA3FDF001EA659 /* Define.swift */,
 				0C964EBB23B8E5A6001EA659 /* Ball */,
 				0CA02F8E23AFAB7D004A580E /* Main.storyboard */,
 				0CA02F9123AFAB7E004A580E /* Assets.xcassets */,
@@ -160,6 +163,7 @@
 				0C964EBD23B8E5D0001EA659 /* Ball.swift in Sources */,
 				0CA02F8B23AFAB7D004A580E /* GameScene.swift in Sources */,
 				0CA02F8D23AFAB7D004A580E /* GameViewController.swift in Sources */,
+				0C964EBF23BA3FDF001EA659 /* Define.swift in Sources */,
 				0CA02F8523AFAB7D004A580E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
