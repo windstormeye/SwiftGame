@@ -33,26 +33,26 @@ class GameScene: SKScene {
     
     private func createContent() {
         for row in 0..<10 {
-            let ball = SKShapeNode(circleOfRadius: 10)
+            let ball = Ball(circleOfRadius: 10)
             ball.fillColor = .red
             addChild(ball)
             ball.physicsBody = SKPhysicsBody(circleOfRadius: 10)
             ball.physicsBody?.velocity = CGVector(dx: 300 + CGFloat(row) * 0.1, dy: 300)
             ball.position = CGPoint(x: size.width / 2, y: 400)
             ball.physicsBody?.categoryBitMask = BitMask.Ball
+            ball.physicsBody?.contactTestBitMask = BitMask.Box
             ball.physicsBody?.collisionBitMask = BitMask.Box
-            ball.physicsBody?.contactTestBitMask = BitMask.Ball
 //            ball.physicsBody?.friction = 0;
             ball.physicsBody?.linearDamping = 0
             ball.physicsBody?.restitution = 1
         }
         
-        let box = SKShapeNode(rectOf: CGSize(width: 50, height: 50))
+        let box = Box(rectOf: CGSize(width: 50, height: 50))
         box.position = CGPoint(x: 300, y: 800)
         box.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: 50))
-        box.physicsBody?.collisionBitMask = BitMask.Box
         box.physicsBody?.categoryBitMask = BitMask.Box
-        box.physicsBody?.contactTestBitMask = BitMask.Box
+        box.physicsBody?.contactTestBitMask = BitMask.Ball
+        box.physicsBody?.collisionBitMask = BitMask.Box
         box.fillColor = .blue
         box.physicsBody?.isDynamic = false
 //        box.physicsBody?.friction = 0;
@@ -90,14 +90,34 @@ class GameScene: SKScene {
 
 extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
+        print("\(contact.bodyA.contactTestBitMask) == \(contact.bodyB.contactTestBitMask)")
         
+        
+        switch contact.bodyA.categoryBitMask {
+        case BitMask.Box:
+            checkNodeIsBox(contact.bodyA.node)
+            
+        default:
+            break
+        }
+        
+        switch contact.bodyB.categoryBitMask {
+        case BitMask.Box:
+            checkNodeIsBox(contact.bodyB.node)
+            
+        default:
+            break
+        }
     }
     
-    func didEnd(_ contact: SKPhysicsContact) {
-        print(contact.bodyA.contactTestBitMask)
+}
+
+extension GameScene {
+    private func checkNodeIsBox(_ node: SKNode?) {
+        guard let box = node else { return }
         
-        if contact.bodyA.contactTestBitMask == contact.bodyA.contactTestBitMask {
-            
+        if box.physicsBody?.categoryBitMask == BitMask.Box {
+            box.removeFromParent()
         }
     }
 }

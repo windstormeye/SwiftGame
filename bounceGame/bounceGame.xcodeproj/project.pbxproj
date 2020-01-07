@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C8BB82F23C4C84B00F88BD6 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8BB82E23C4C84B00F88BD6 /* Box.swift */; };
 		0C964EBD23B8E5D0001EA659 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C964EBC23B8E5D0001EA659 /* Ball.swift */; };
 		0C964EBF23BA3FDF001EA659 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C964EBE23BA3FDF001EA659 /* Define.swift */; };
 		0CA02F8523AFAB7D004A580E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA02F8423AFAB7D004A580E /* AppDelegate.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C8BB82E23C4C84B00F88BD6 /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		0C964EBC23B8E5D0001EA659 /* Ball.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = "<group>"; };
 		0C964EBE23BA3FDF001EA659 /* Define.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		0CA02F8123AFAB7D004A580E /* bounceGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bounceGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +51,7 @@
 			isa = PBXGroup;
 			children = (
 				0C964EBC23B8E5D0001EA659 /* Ball.swift */,
+				0C8BB82E23C4C84B00F88BD6 /* Box.swift */,
 			);
 			path = Ball;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 				0C964EBD23B8E5D0001EA659 /* Ball.swift in Sources */,
 				0CA02F8B23AFAB7D004A580E /* GameScene.swift in Sources */,
 				0CA02F8D23AFAB7D004A580E /* GameViewController.swift in Sources */,
+				0C8BB82F23C4C84B00F88BD6 /* Box.swift in Sources */,
 				0C964EBF23BA3FDF001EA659 /* Define.swift in Sources */,
 				0CA02F8523AFAB7D004A580E /* AppDelegate.swift in Sources */,
 			);
