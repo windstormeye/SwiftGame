@@ -32,38 +32,50 @@ class GameScene: SKScene {
     }
     
     private func createContent() {
-        for row in 0..<10 {
+        for row in 0..<5 {
             let ball = Ball(circleOfRadius: 10)
             ball.fillColor = .red
             addChild(ball)
             ball.physicsBody = SKPhysicsBody(circleOfRadius: 10)
-            ball.physicsBody?.velocity = CGVector(dx: 300 + CGFloat(row) * 0.1, dy: 300)
+            ball.physicsBody?.applyForce(CGVector(dx: 600 + CGFloat(row) * 0.1, dy: 600))
             ball.position = CGPoint(x: size.width / 2, y: 400)
             ball.physicsBody?.categoryBitMask = BitMask.Ball
             ball.physicsBody?.contactTestBitMask = BitMask.Box
             ball.physicsBody?.collisionBitMask = BitMask.Box
-//            ball.physicsBody?.friction = 0;
+            ball.physicsBody?.usesPreciseCollisionDetection = true;
             ball.physicsBody?.linearDamping = 0
-            ball.physicsBody?.restitution = 1
+            ball.physicsBody?.restitution = 1.0
         }
         
-        let box = Box(rectOf: CGSize(width: 50, height: 50))
-        box.position = CGPoint(x: 300, y: 800)
-        box.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: 50))
-        box.physicsBody?.categoryBitMask = BitMask.Box
-        box.physicsBody?.contactTestBitMask = BitMask.Ball
-        box.physicsBody?.collisionBitMask = BitMask.Box
-        box.fillColor = .blue
-        box.physicsBody?.isDynamic = false
-//        box.physicsBody?.friction = 0;
-        box.physicsBody?.restitution = 1
-        addChild(box)
+        for row in 0..<5 {
+            let box = Box(rectOf: CGSize(width: 50, height: 50))
+            box.position = CGPoint(x: 50 + (row * 50 + 20), y: (800 - row * 50 + 20))
+            box.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: 50))
+            box.physicsBody?.categoryBitMask = BitMask.Box
+            box.physicsBody?.contactTestBitMask = BitMask.Ball
+            box.physicsBody?.collisionBitMask = BitMask.Box
+            box.physicsBody?.linearDamping = 0
+            box.physicsBody?.restitution = 1.0
+            box.physicsBody?.isDynamic = false
+            box.fillColor = .red
+            
+            let label = Label(text: "\(row + 1)")
+            label.fontSize = 22
+            label.typoTag = 666
+            label.fontName = "Arial-BoldMT"
+            label.color = .white
+            label.position = CGPoint(x: 0, y: -label.frame.size.height / 2)
+            box.addChild(label)
+            
+            addChild(box)
+        }
         
         let ground = SKSpriteNode(color: .gray, size: CGSize(width: size.width, height: 200))
         ground.position = CGPoint(x: size.width / 2, y: ground.size.height / 2)
         addChild(ground)
         ground.physicsBody = SKPhysicsBody(rectangleOf: ground.size)
         ground.physicsBody?.isDynamic = false
+//        ground.physicsBody?.linearDamping = 0
         ground.physicsBody?.collisionBitMask = BitMask.Ground
         ground.physicsBody?.categoryBitMask = BitMask.Ground
         ground.physicsBody?.contactTestBitMask = BitMask.Ground
@@ -72,12 +84,10 @@ class GameScene: SKScene {
         wall.position = CGPoint(x: 0, y: 0)
         wall.physicsBody?.friction = 0
         wall.physicsBody?.isDynamic = false
-//        wall.physicsBody?.friction = 0
-        wall.physicsBody?.linearDamping = 0
-        wall.physicsBody?.restitution = 1
-        ground.physicsBody?.collisionBitMask = BitMask.Ground
-        ground.physicsBody?.categoryBitMask = BitMask.Ground
-        ground.physicsBody?.contactTestBitMask = BitMask.Ground
+        wall.physicsBody?.restitution = 1.0
+        wall.physicsBody?.collisionBitMask = BitMask.Ground
+        wall.physicsBody?.categoryBitMask = BitMask.Ground
+        wall.physicsBody?.contactTestBitMask = BitMask.Ground
         wall.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         addChild(wall)
     }
@@ -109,7 +119,6 @@ extension GameScene: SKPhysicsContactDelegate {
             break
         }
     }
-    
 }
 
 extension GameScene {
@@ -117,7 +126,14 @@ extension GameScene {
         guard let box = node else { return }
         
         if box.physicsBody?.categoryBitMask == BitMask.Box {
-            box.removeFromParent()
+            let label = box.children.first! as! Label
+            var tag = Int(label.text!)!
+            if (tag > 0) {
+                tag -= 1
+                label.text = "\(tag)"
+            } else {
+                box.removeFromParent()
+            }
         }
     }
 }

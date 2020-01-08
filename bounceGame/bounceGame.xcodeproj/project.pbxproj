@@ -18,6 +18,8 @@
 		0CA02F9023AFAB7D004A580E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CA02F8E23AFAB7D004A580E /* Main.storyboard */; };
 		0CA02F9223AFAB7E004A580E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CA02F9123AFAB7E004A580E /* Assets.xcassets */; };
 		0CA02F9523AFAB7E004A580E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CA02F9323AFAB7E004A580E /* LaunchScreen.storyboard */; };
+		0CFFFBBE23C629AD00BB3F13 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFFFBBD23C629AD00BB3F13 /* Label.swift */; };
+		0CFFFBC223C62AD300BB3F13 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFFFBC123C62AD300BB3F13 /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		0CA02F9123AFAB7E004A580E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0CA02F9423AFAB7E004A580E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0CA02F9623AFAB7E004A580E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0CFFFBBD23C629AD00BB3F13 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		0CFFFBC123C62AD300BB3F13 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +56,7 @@
 			children = (
 				0C964EBC23B8E5D0001EA659 /* Ball.swift */,
 				0C8BB82E23C4C84B00F88BD6 /* Box.swift */,
+				0CFFFBBD23C629AD00BB3F13 /* Label.swift */,
 			);
 			path = Ball;
 			sourceTree = "<group>";
@@ -81,6 +86,7 @@
 				0CA02F8A23AFAB7D004A580E /* GameScene.swift */,
 				0CA02F8C23AFAB7D004A580E /* GameViewController.swift */,
 				0C964EBE23BA3FDF001EA659 /* Define.swift */,
+				0CFFFBC123C62AD300BB3F13 /* Extension.swift */,
 				0C964EBB23B8E5A6001EA659 /* Ball */,
 				0CA02F8E23AFAB7D004A580E /* Main.storyboard */,
 				0CA02F9123AFAB7E004A580E /* Assets.xcassets */,
@@ -168,7 +174,9 @@
 				0CA02F8D23AFAB7D004A580E /* GameViewController.swift in Sources */,
 				0C8BB82F23C4C84B00F88BD6 /* Box.swift in Sources */,
 				0C964EBF23BA3FDF001EA659 /* Define.swift in Sources */,
+				0CFFFBBE23C629AD00BB3F13 /* Label.swift in Sources */,
 				0CA02F8523AFAB7D004A580E /* AppDelegate.swift in Sources */,
+				0CFFFBC223C62AD300BB3F13 /* Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
