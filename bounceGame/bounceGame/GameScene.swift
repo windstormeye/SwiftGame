@@ -37,7 +37,7 @@ class GameScene: SKScene {
             ball.fillColor = .red
             addChild(ball)
             ball.physicsBody = SKPhysicsBody(circleOfRadius: 10)
-            ball.physicsBody?.applyForce(CGVector(dx: 600 + CGFloat(row) * 0.1, dy: 600))
+            ball.physicsBody?.applyForce(CGVector(dx: 400 + CGFloat(row) * 0.1, dy: 400))
             ball.position = CGPoint(x: size.width / 2, y: 400)
             ball.physicsBody?.categoryBitMask = BitMask.Ball
             ball.physicsBody?.contactTestBitMask = BitMask.Box
@@ -47,7 +47,7 @@ class GameScene: SKScene {
             ball.physicsBody?.restitution = 1.0
         }
         
-        for row in 0..<5 {
+        for row in 1...5 {
             let box = Box(rectOf: CGSize(width: 50, height: 50))
             box.position = CGPoint(x: 50 + (row * 50 + 20), y: (800 - row * 50 + 20))
             box.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: 50))
@@ -59,7 +59,7 @@ class GameScene: SKScene {
             box.physicsBody?.isDynamic = false
             box.fillColor = .red
             
-            let label = Label(text: "\(row + 1)")
+            let label = Label(text: "\(row)")
             label.fontSize = 22
             label.typoTag = 666
             label.fontName = "Arial-BoldMT"
@@ -128,7 +128,7 @@ extension GameScene {
         if box.physicsBody?.categoryBitMask == BitMask.Box {
             let label = box.children.first! as! Label
             var tag = Int(label.text!)!
-            if (tag > 0) {
+            if (tag > 1) {
                 tag -= 1
                 label.text = "\(tag)"
             } else {
