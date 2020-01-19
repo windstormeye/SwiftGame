@@ -10,6 +10,11 @@ import SpriteKit
 
 class GameScene: SKScene {
     
+    private var balls = [Ball]()
+    private var contactGroundBalls = [Ball]()
+    
+    private var ground = SKSpriteNode()
+    
     override init(size: CGSize) {
         super.init(size: size)
         
@@ -32,13 +37,34 @@ class GameScene: SKScene {
     }
     
     private func createContent() {
-        for row in 0..<5 {
+        ground = SKSpriteNode(color: .gray, size: CGSize(width: size.width, height: 120))
+        ground.position = CGPoint(x: size.width / 2, y: ground.size.height / 2)
+        addChild(ground)
+        ground.physicsBody = SKPhysicsBody(rectangleOf: ground.size)
+        ground.physicsBody?.isDynamic = false
+//        ground.physicsBody?.linearDamping = 0
+        ground.physicsBody?.collisionBitMask = BitMask.Ground
+        ground.physicsBody?.categoryBitMask = BitMask.Ground
+        ground.physicsBody?.contactTestBitMask = BitMask.Ground
+        
+        let wall = SKNode()
+        wall.position = CGPoint(x: 0, y: 0)
+        wall.physicsBody?.friction = 0
+        wall.physicsBody?.isDynamic = false
+        wall.physicsBody?.restitution = 1.0
+        wall.physicsBody?.collisionBitMask = BitMask.Ground
+        wall.physicsBody?.categoryBitMask = BitMask.Ground
+        wall.physicsBody?.contactTestBitMask = BitMask.Ground
+        wall.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        addChild(wall)
+        
+        for _ in 0..<5 {
             let ball = Ball(circleOfRadius: 10)
             ball.fillColor = .red
             addChild(ball)
             ball.physicsBody = SKPhysicsBody(circleOfRadius: 10)
-            ball.physicsBody?.applyForce(CGVector(dx: 400 + CGFloat(row) * 0.1, dy: 400))
-            ball.position = CGPoint(x: size.width / 2, y: 400)
+            balls.append(ball)
+            ball.position = CGPoint(x: size.width / 2, y: ground.frame.size.height + ball.frame.size.height / 2)
             ball.physicsBody?.categoryBitMask = BitMask.Ball
             ball.physicsBody?.contactTestBitMask = BitMask.Box
             ball.physicsBody?.collisionBitMask = BitMask.Box
@@ -69,32 +95,27 @@ class GameScene: SKScene {
             
             addChild(box)
         }
-        
-        let ground = SKSpriteNode(color: .gray, size: CGSize(width: size.width, height: 200))
-        ground.position = CGPoint(x: size.width / 2, y: ground.size.height / 2)
-        addChild(ground)
-        ground.physicsBody = SKPhysicsBody(rectangleOf: ground.size)
-        ground.physicsBody?.isDynamic = false
-//        ground.physicsBody?.linearDamping = 0
-        ground.physicsBody?.collisionBitMask = BitMask.Ground
-        ground.physicsBody?.categoryBitMask = BitMask.Ground
-        ground.physicsBody?.contactTestBitMask = BitMask.Ground
-        
-        let wall = SKNode()
-        wall.position = CGPoint(x: 0, y: 0)
-        wall.physicsBody?.friction = 0
-        wall.physicsBody?.isDynamic = false
-        wall.physicsBody?.restitution = 1.0
-        wall.physicsBody?.collisionBitMask = BitMask.Ground
-        wall.physicsBody?.categoryBitMask = BitMask.Ground
-        wall.physicsBody?.contactTestBitMask = BitMask.Ground
-        wall.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-        addChild(wall)
     }
     
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+    }
+}
+
+extension GameScene {
+    private func shot() {
+        for (index, ball) in balls.enumerated() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1 * Double(index)) {
+                ball.physicsBody?.applyForce(CGVector(dx: 400 + CGFloat(index) * 0.1, dy: 800))
+            }
+        }
+    }
+}
+
+extension GameScene {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        shot()
     }
 }
 
@@ -106,7 +127,8 @@ extension GameScene: SKPhysicsContactDelegate {
         switch contact.bodyA.categoryBitMask {
         case BitMask.Box:
             checkNodeIsBox(contact.bodyA.node)
-            
+        case BitMask.Ground:
+            checkNodeIsGroud(contact.bodyB.node)
         default:
             break
         }
@@ -114,7 +136,8 @@ extension GameScene: SKPhysicsContactDelegate {
         switch contact.bodyB.categoryBitMask {
         case BitMask.Box:
             checkNodeIsBox(contact.bodyB.node)
-            
+        case BitMask.Ground:
+            checkNodeIsGroud(contact.bodyA.node)
         default:
             break
         }
@@ -134,6 +157,20 @@ extension GameScene {
             } else {
                 box.removeFromParent()
             }
+        }
+    }
+    
+    private func checkNodeIsGroud(_ node: SKNode?) {
+        guard let ball = node else { return }
+        
+        if ball.physicsBody?.categoryBitMask == BitMask.Ball {
+            if !contactGroundBalls.isEmpty {
+                let firstBallX = contactGroundBalls.first!.frame.midX
+                ball.position = CGPoint(x: firstBallX, y: ground.frame.size.height + ball.frame.size.height / 2)
+            }
+            
+            contactGroundBalls.append(ball as! Ball)
+//            ball.physicsBody?.isDynamic = false
         }
     }
 }
