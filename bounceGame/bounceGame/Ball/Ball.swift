@@ -9,6 +9,6 @@
 import SpriteKit
 
 class Ball: SKShapeNode {
-    
+    var isShot = false
     
 }
