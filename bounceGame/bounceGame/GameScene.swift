@@ -13,15 +13,20 @@ class GameScene: SKScene {
     private var balls = [Ball]()
     private var contactGroundBalls = [Ball]()
     
+    
     private var isBegin = false
     
+    
     private var ground = SKSpriteNode()
+    private var firstDownBall: Ball?
+    
+    
+    
     
     override init(size: CGSize) {
         super.init(size: size)
         
-        physicsWorld.gravity = CGVector(dx: 0, dy: -0.01)
-//        physicsWorld.speed = 5
+        physicsWorld.gravity = CGVector(dx: 0, dy: -1)
         physicsWorld.contactDelegate = self
     }
 
@@ -45,7 +50,7 @@ class GameScene: SKScene {
         ground.physicsBody = SKPhysicsBody(rectangleOf: ground.size)
         ground.physicsBody?.isDynamic = false
         ground.physicsBody?.collisionBitMask = BitMask.Ball
-        ground.physicsBody?.categoryBitMask = BitMask.Ball
+        ground.physicsBody?.categoryBitMask = BitMask.Ground
         ground.physicsBody?.contactTestBitMask = BitMask.Ball
         
         let wall = SKNode()
@@ -61,17 +66,10 @@ class GameScene: SKScene {
         
         for _ in 0..<5 {
             let ball = Ball(circleOfRadius: 10)
-            ball.fillColor = .red
-            addChild(ball)
-            ball.physicsBody = SKPhysicsBody(circleOfRadius: 10)
             balls.append(ball)
+            addChild(ball)
+            ball.physicsBody?.isDynamic = false
             ball.position = CGPoint(x: size.width / 2, y: ground.frame.size.height + ball.frame.size.height / 2)
-            ball.physicsBody?.categoryBitMask = BitMask.Ball
-            ball.physicsBody?.contactTestBitMask = BitMask.Box
-            ball.physicsBody?.collisionBitMask = BitMask.Box
-            ball.physicsBody?.usesPreciseCollisionDetection = true;
-            ball.physicsBody?.linearDamping = 0
-            ball.physicsBody?.restitution = 1.0
         }
         
         for row in 1...5 {
@@ -97,30 +95,27 @@ class GameScene: SKScene {
             addChild(box)
         }
     }
-    
-    
-    override func update(_ currentTime: TimeInterval) {
-        
-        for ball in balls {
-            if ball.position.y <= ground.size.height + ball.frame.size.height / 2 &&
-                ball.isShot {
-                
-                if !contactGroundBalls.isEmpty {
-                    let firstBallX = contactGroundBalls.first!.frame.midX
-                    ball.position = CGPoint(x: firstBallX, y: ground.size.height + ball.frame.size.height / 2)
-                }
-                
-                contactGroundBalls.append(ball)
-            }
-        }
-    }
 }
 
 extension GameScene {
     private func shot() {
         for (index, ball) in balls.enumerated() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1 * Double(index)) {
-                ball.physicsBody?.applyForce(CGVector(dx: 400 + CGFloat(index) * 0.1, dy: 800))
+                ball.physicsBody?.isDynamic = true
+                if (!self.children.contains(ball)) {
+                    self.addChild(ball)
+                }
+                ball.physicsBody?.applyImpulse(CGVector(dx: 10, dy: 10))
+                ball.physicsBody?.applyTorque(1.8)
+//                ball.physicsBody?.applyForce(CGVector(dx: 400 + CGFloat(index) * 0.1, dy: 800))
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+                    ball.isShot = true
+                    
+                    if (index == self.balls.count - 1) {
+                        self.firstDownBall?.removeFromParent()
+                        self.firstDownBall = nil
+                    }
+                }
             }
         }
     }
@@ -137,12 +132,15 @@ extension GameScene: SKPhysicsContactDelegate {
         print("\(contact.bodyA.contactTestBitMask) == \(contact.bodyB.contactTestBitMask)")
         
         
+        
         switch contact.bodyA.categoryBitMask {
         case BitMask.Box:
             checkNodeIsBox(contact.bodyA.node)
             checkNodeIsWall(contact.bodyB.node)
         case BitMask.Wall:
             checkNodeIsWall(contact.bodyB.node)
+        case BitMask.Ground:
+            checkNodeIsGround(contact.bodyB.node)
         default:
             break
         }
@@ -153,6 +151,8 @@ extension GameScene: SKPhysicsContactDelegate {
             checkNodeIsWall(contact.bodyA.node)
         case BitMask.Wall:
             checkNodeIsWall(contact.bodyA.node)
+        case BitMask.Ground:
+            checkNodeIsGround(contact.bodyA.node)
         default:
             break
         }
@@ -179,6 +179,27 @@ extension GameScene {
         guard let ball = node as? Ball else { return }
            
         ball.isShot = true
+    }
+    
+    private func checkNodeIsGround(_ node: SKNode?) {
+        guard let ball = node as? Ball else { return }
+        
+        // NOTE: 小球 & 发射出去
+        if (ball.physicsBody?.categoryBitMask == BitMask.Ball && ball.isShot) {
+            ball.removeFromParent();
+            
+            // NOTE: 定位小球不存在 || 当前 Scene 中不包含定位小球
+            if (firstDownBall == nil || !children.contains(firstDownBall!)) {
+                firstDownBall = Ball(circleOfRadius: 10)
+                firstDownBall!.position = CGPoint(x: ball.position.x, y: ground.frame.size.height + ball.frame.size.height / 2 - 2)
+                addChild(firstDownBall!)
+                // NOTE: 静止
+                firstDownBall!.physicsBody?.isDynamic = false
+            }
+        
+            // NOTE: 统一重设后续触底小球位置。二次发射时，直接读取各个小球的初始位置进行发射
+            ball.position = CGPoint(x: firstDownBall!.position.x, y: ground.frame.size.height + ball.frame.size.height / 2)
+        }
     }
 }
 
