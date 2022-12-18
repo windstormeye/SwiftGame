@@ -114,12 +114,14 @@ class GameManager: ObservableObject {
         /// 左右两灯之间的间距
         let innerSpacing: CGFloat = 20
         
-        var circleWidth = (UIScreen.main.bounds.width - padding - (CGFloat(size) * innerSpacing)) / CGFloat(size)
-        
+        var circleWidth: CGFloat = 50
+        #if os(iOS)
+        circleWidth = (UIScreen.main.bounds.width - padding - (CGFloat(size) * innerSpacing)) / CGFloat(size)
         // 太大了会很丑，过滤下
         if circleWidth > UIScreen.main.bounds.width / 5 {
             circleWidth = UIScreen.main.bounds.width / 5
         }
+        #endif
     
         return circleWidth
     }

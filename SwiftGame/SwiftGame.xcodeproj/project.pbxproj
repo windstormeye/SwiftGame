@@ -15,6 +15,9 @@
 		0C4088C6294EC8030064D85F /* PuzzleGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4088C5294EC8030064D85F /* PuzzleGame.swift */; };
 		0C4088C8294EC80A0064D85F /* PinBallGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4088C7294EC80A0064D85F /* PinBallGame.swift */; };
 		0C4088CC294ECC6F0064D85F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4088CB294ECC6F0064D85F /* Game.swift */; };
+		0C4088D4294EE8920064D85F /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4088D1294EE8920064D85F /* GameController.swift */; };
+		0C4088D5294EE8920064D85F /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4088D2294EE8920064D85F /* Light.swift */; };
+		0C4088D6294EE8920064D85F /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4088D3294EE8920064D85F /* GameManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		0C4088C5294EC8030064D85F /* PuzzleGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleGame.swift; sourceTree = "<group>"; };
 		0C4088C7294EC80A0064D85F /* PinBallGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinBallGame.swift; sourceTree = "<group>"; };
 		0C4088CB294ECC6F0064D85F /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		0C4088D1294EE8920064D85F /* GameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
+		0C4088D2294EE8920064D85F /* Light.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
+		0C4088D3294EE8920064D85F /* GameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +88,7 @@
 		0C4088C0294EC7320064D85F /* TurnOffLight */ = {
 			isa = PBXGroup;
 			children = (
+				0C4088D0294EE8920064D85F /* Model */,
 				0C4088C3294EC7FD0064D85F /* TurnOffLightGame.swift */,
 			);
 			path = TurnOffLight;
@@ -119,6 +126,17 @@
 				0C4088C0294EC7320064D85F /* TurnOffLight */,
 			);
 			path = Game;
+			sourceTree = "<group>";
+		};
+		0C4088D0294EE8920064D85F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0C4088D1294EE8920064D85F /* GameController.swift */,
+				0C4088D2294EE8920064D85F /* Light.swift */,
+				0C4088D3294EE8920064D85F /* GameManager.swift */,
+			);
+			name = Model;
+			path = "../../../../lightGame/light-game/Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,11 +210,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C4088B4294EC7020064D85F /* ContentView.swift in Sources */,
+				0C4088D6294EE8920064D85F /* GameManager.swift in Sources */,
 				0C4088CC294ECC6F0064D85F /* Game.swift in Sources */,
 				0C4088B2294EC7020064D85F /* SwiftGameApp.swift in Sources */,
 				0C4088C4294EC7FD0064D85F /* TurnOffLightGame.swift in Sources */,
 				0C4088C6294EC8030064D85F /* PuzzleGame.swift in Sources */,
 				0C4088C8294EC80A0064D85F /* PinBallGame.swift in Sources */,
+				0C4088D5294EE8920064D85F /* Light.swift in Sources */,
+				0C4088D4294EE8920064D85F /* GameController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
